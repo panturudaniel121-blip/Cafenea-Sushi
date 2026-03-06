@@ -1,0 +1,188 @@
+body
+{
+    background-color: var(--culoare_fudal_exterior);
+    padding: 0;
+    margin: 0;
+
+    --culoare_fudal_interior:rgb(193, 205, 146);
+    --culoare_fudal_exterior:rgb(164, 137, 47);
+    --culoare_contur:rgb(0, 0, 0);
+    --dimensiune_figuri:500px;
+    --margine_pagina:100px;
+
+
+}
+
+section{
+    background-color: var(--culoare_fudal_interior);
+    border: 1px solid var(--culoare_contur);
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0 0 5px var(--culoare_contur); 
+}
+
+header{
+    background-color: var(--culoare_fudal_exterior);
+    padding: 10px;
+    margin: 0;
+}
+
+header > *{
+        font-weight: bold;
+}
+
+header > h1 
+{
+    margin: 0;
+    font-size: 60px;
+
+}
+
+p
+{
+    color:var(--culoare_fudal)
+}
+
+/*comentariu*/
+main
+{
+    margin-right: var(--margine_pagina);
+    margin-left: var(--margine_pagina);
+}
+
+figure{
+    margin:0;
+    background-color: var(--culoare_fudal_interior);
+}
+
+figure.fg-img> img{
+    height: var(--dimensiune_figuri);
+    width: var(--dimensiune_figuri);
+    
+}
+
+.subtitlu {
+    margin: -20px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    color: gray;
+}
+
+.grid-galerie
+{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.grid-galerie figure img {
+    height: 400px;
+}
+
+#tab-orar {
+    border-spacing: 15px; 
+}   
+
+.container-iframe a{
+    border: 2px solid purple;
+    margin-left: 10px;
+    
+}
+#grid-pagina
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:"welcome welcome welcome" 
+                       "promotii promotii evenimente"
+                       "fig1 produse produse"
+                        "fig2 produse produse"
+                        "fig3 produse produse"
+                        "anunturi orar orar"
+                        "intrebari intrebari intrebari";
+
+}
+
+#grid-pagina > *
+{
+    border: 1px solid var(--culoare_contur);
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0 0 5px var(--culoare_contur);
+
+}
+
+
+#welcome{
+    grid-area: welcome;
+}
+#promotii{
+    grid-area: promotii;
+}
+#evenimente{
+    grid-area: evenimente;
+}
+#orar{
+    grid-area: orar;
+}
+ 
+#fig1{
+    grid-area: fig1;
+}
+#fig2{
+    grid-area: fig2;
+}
+#fig3{
+    grid-area: fig3;
+}
+#produse{
+    grid-area: produse;
+}
+#index-intrebari{
+    grid-area: intrebari;
+}
+#anunturi
+{
+    grid-area: anunturi;
+}
+#linkuri
+{
+    grid-area: linkuri;
+}
+
+
+@media screen and (max-width:1200px)
+ {
+    
+    body{
+        --margine_pagina:80px;
+    }
+
+    #grid-pagina{
+    grid-template-columns: 2fr 2fr;
+    grid-template-areas:"welcome welcome" 
+                       "promotii anunturi"
+                       "fig1 orar"
+                        "fig2  orar"
+                        "fig3  orar"
+                        "produse produse"
+                        "index index";
+
+}
+
+    #tab-orar {
+        border-spacing: 7px; 
+    } 
+    }
+
+@media screen and (max-width:800px)
+ {
+    
+    body{
+        --margine_pagina:50px;
+    }
+    #grid-pagina
+    {
+        display: block;
+    }
+
+        #tab-orar {
+        border-spacing: 0; 
+    } 
+}
