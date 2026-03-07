@@ -1,6 +1,7 @@
 body
 {
     background-color: var(--culoare_fudal_exterior);
+    font-family: "Merriweather", serif;
     padding: 0;
     margin: 0;
 
@@ -60,6 +61,12 @@ figure.fg-img> img{
     
 }
 
+footer, .flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .subtitlu {
     margin: -20px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
@@ -77,15 +84,41 @@ figure.fg-img> img{
     height: 400px;
 }
 
+.container-iframe a{
+    border: 2px solid purple;
+    margin-left: 10px;
+    padding: 3px;
+    
+}
+
+.smythe{
+    font-family: "Smythe", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.pacifico {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container-contacte{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
 #tab-orar {
     border-spacing: 15px; 
 }   
 
-.container-iframe a{
-    border: 2px solid purple;
-    margin-left: 10px;
-    
+#tabel-ocupatie td {
+    padding: 10px;
+    border-spacing: 15px;
 }
+
 #grid-pagina
 {
     display: grid;
@@ -96,7 +129,10 @@ figure.fg-img> img{
                         "fig2 produse produse"
                         "fig3 produse produse"
                         "anunturi orar orar"
-                        "intrebari intrebari intrebari";
+                        "intrebari intrebari intrebari"
+                        "galerie galerie galerie"
+                        "retete retete linkuri"
+                        "meniu meniu meniu";
 
 }
 
@@ -106,6 +142,10 @@ figure.fg-img> img{
     padding: 10px 10px 10px 10px;
     box-shadow: 0 0 5px var(--culoare_contur);
 
+}
+
+#welcome img {
+    height: 600px;
 }
 
 
@@ -145,7 +185,23 @@ figure.fg-img> img{
 {
     grid-area: linkuri;
 }
+#galerie-statica
+{
+    grid-area: galerie;    
+}
+#retete
+{
+    grid-area: retete;    
+}
+#meniu-pdf
+{
+    grid-area: meniu;
+}
 
+@font-face {
+  font-family: Smythe; 
+  src: url(resurse\font\Smythe-Regular.ttf);
+}
 
 @media screen and (max-width:1200px)
  {
@@ -156,20 +212,24 @@ figure.fg-img> img{
 
     #grid-pagina{
     grid-template-columns: 2fr 2fr;
-    grid-template-areas:"welcome welcome" 
-                       "promotii anunturi"
-                       "fig1 orar"
-                        "fig2  orar"
-                        "fig3  orar"
-                        "produse produse"
-                        "index index";
-
-}
+    grid-template-areas:
+                "welcome welcome" 
+                "promotii anunturi"
+                "evenimente evenimente" 
+                "fig1 orar"
+                "fig2 orar"
+                "fig3 orar"
+                "produse produse"
+                "intrebari intrebari" 
+                "galerie galerie"
+                "retete linkuri"
+                "meniu meniu";
+    }
 
     #tab-orar {
         border-spacing: 7px; 
     } 
-    }
+}
 
 @media screen and (max-width:800px)
  {

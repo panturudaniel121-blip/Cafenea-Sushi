@@ -18,51 +18,87 @@
     <link rel="stylesheet" href="./resurse/css/general.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+
     <title>Cafenea & Sushi</title>
 </head>
 <body>
     <header>
-        <h1>Cafenea & Sushi <i class="fa-solid fa-mug-hot"></i></h1>
+        <h1 class="pacifico">Cafenea &amp; Sushi <i class="fa-solid fa-mug-hot"></i></h1>
         <!-- <img src="/resurse/imagini/poza_start.png" alt="sigla" /> -->
         <nav>
             <h2>Navigare </h2>
             <ul>
                 <li>Acasa
+                <details><summary>Continutul paginii</summary>
                     <ul>
                         <li><a href="#welcome">Welcome</a></li>
-                        <li><a href="#promitii">Promoții</a></li>
+                        <li><a href="#promotii">Promoții</a></li>
                         <li><a href="#produse">Produsele</a></li>
-                        <li><a href="#evenimente">Evenimente</a></li>
                         <li><a href="#linkuri">Link-uri utile</a></li>
-                    </ul></li>
-                <li>meniu</li>
-                <li>evenimente</li>
-                <li>rezervari</li>
+                        <li><a href="#anunturi">Anunturi</a></li>
+                        <li><a href="#index-intrebari">Intrebari frecvente</a></li>
+                        <li><a href="#galerie-statica">Galerie</a></li>
+                        <li><a href="#retete">Retete</a></li>
+                        <li><a href="#meniu-pdf">Meniu</a></li>
+                        <li><a href="#footer">Subsol</a></li>
+                    </ul>
+                    </details>
+                </li>
+                <li>Meniu</li>
+                <li>Evenimente</li>
+                <li>Rezervari</li>
             </ul>
         </nav>
     </header>
     <Br>
     <main> <!--  comentariu -->
+
         <div id="grid-pagina">
 
             <section id="welcome">
-                <hgroup>
-                    <h2>Bine ati venit</h2>
-                    <p class="subtitlu">pe site-ul nostru</p>
-                </hgroup>
-                <p class="intro">Vă mulțumim că ne vizitați site-ul. Vă invităm la cafeaua de dimineată și la un sushi delicios.</p>
+                <div class="flex-row">
+                    <div>
+                        <hgroup>
+                            <h2>Bine ati venit</h2>
+                            <p class="subtitlu">pe site-ul nostru</p>
+                        </hgroup>
+                        <p class="intro">Vă mulțumim că ne vizitați site-ul. Vă invităm la cafeaua de dimineată și la un sushi delicios.</p>
 
-                <p class="anunt intro">Puteți alege din marea noastră varietate de cafele si</p>
-                    <div id="dv-prezentare">
-                    <figure>
-                    <picture title="Cafeaua zilei">
-                        <!-- il ia pe primul care se potriveste cu query-ul din media-->
-                        <source srcset="/resurse/imagini/cafeau_zilei200.jpg" media="(max-width:700px)"/>
-                        <source srcset="/resurse/imagini/cafeau_zilei400.jpg" media="(max-width:1200px)"/>
-                        <img src="/resurse/imagini/cafeau_zilei600.jpg" alt="cafea"/>
-                    </picture>
-                    <figcaption>Cafeaua zilei</figcaption>
-                    </figure>
+                        <p class="anunt intro">Puteți alege din marea noastră varietate de cafele si</p>
+
+                        <div id="dv-prezentare">
+                            <figure>
+                                <picture title="Cafeaua zilei">
+                                    <!-- il ia pe primul care se potriveste cu query-ul din media-->
+                                    <source srcset="/resurse/imagini/cafeau_zilei200.jpg" media="(max-width:700px)"/>
+                                    <source srcset="/resurse/imagini/cafeau_zilei400.jpg" media="(max-width:1200px)"/>
+                                    <img src="/resurse/imagini/cafeau_zilei600.jpg" alt="cafea"/>
+                                </picture>
+                                <figcaption>Cafeaua zilei</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2>Vrei sa te informezi despre originea cafelei si a sushi-ului? </h2>
+                        <p></p>Apasa pe ce esti interesat sa afli si vei fi redirectionat automat la wikipedia!</p>
+                        <br>
+                        <br>
+                        <img src="resurse/imagini/cafea&sushi.png" alt="Masă cu sushi și cafea" usemap="#harta_produse">
+
+                        <map name="harta_produse">
+                            <area shape="poly" coords="82,319,64,143,128,146,143,297" title="cafea" href="https://ro.wikipedia.org/wiki/Cafea">
+                            <area shape="poly" coords="241,123,248,296,438,314,330,108,383,127,414,163,439,184" title="cafea" href="https://ro.wikipedia.org/wiki/Cafea">
+                            <area shape="poly" coords="121,363,152,313,406,331,410,389" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi">
+                            <area shape="poly" coords="28,234,14,293,65,242,64,296" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi">
+                            <area shape="poly" coords="148,239,150,293,227,235,240,293" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi">
+                        </map>
+                    </div>
                 </div>
             </section>
         <!-- <div id="container-video">
@@ -153,6 +189,49 @@
                         <li>compoziție secretă de Matcha (sincer, noi folosim doar lapte vegan +4 LEI)</li>
                     </ul>
                 </section>
+
+                <section id="grad-ocupare">
+                <h2>Ocupatia zilnica medie</h2>
+                <table id="tabel-ocupatie">
+                    <tr>
+                        <td >LUNI</td>
+                        <td><meter min="0" max="100" value="60"></meter></td>
+                        <td> - 60%</td>
+                    </tr>
+                    <tr>
+                        <td>MARȚI</td>
+                        <td><meter min="0" max="100" value="55"></meter></td>
+                        <td> - 55%</td>
+                    </tr>
+                    <tr>
+                        <td>MIERCURI</td>
+                        <td><meter min="0" max="100" value="65"></meter></td>
+                        <td> - 65%</td>
+                    </tr>
+                    <tr>
+                        <td>JOI</td>
+                        <td><meter min="0" max="100" value="65"></meter></td>
+                        <td> - 65%</td>
+                    </tr>
+                    <tr>
+                        <td>VINERI</td>
+                        <td><meter min="0" max="100" value="80"></meter></td>
+                        <td> - 80%</td>
+                    </tr>
+                    <tr>
+                        <td>SÂMBĂTĂ</td>
+                        <td><meter min="0" max="100" value="90"></meter></td>
+                        <td> - 90%</td>
+                    </tr>
+                    <tr>
+                        <td>DUMINICĂ</td>
+                        <td><meter min="0" max="100" value="75"></meter></td>
+                        <td> - 75%</td>
+                    </tr>
+                </table>
+            </section>
+                
+
             </section>
             <section id="orar">
                 <h2>Orar</h2>
@@ -274,12 +353,49 @@
                 <details><summary>Sunteți cumva asociați cu medicii cardiologi, clinicile de somnologie și organizatorii de evenimente japoneze?</summary>
                     <p>Ne rezervăm dreptul de a nu răspunde la această întrebare; mulțumim pentru înțelegere!</p>
                 </details>
+                    <details><summary>Exista acces la internet in acest bitro?</summary>
+                    <p>DA! Parola Wi-fi ului se obtine doar prin rezolvarea urmatoarei probleme de matematica</p>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" style="font-size: 1.5em; margin: 25px 0;">
+                        <mrow>
+                            <msubsup>
+                            <mo>&#x222B;</mo>
+                            <mn>0</mn>
+                            <mn>1</mn>
+                            </msubsup>
+                            
+                            <mfrac>
+                            <mrow>
+                                <mi>ln</mi>
+                                <mo>(</mo>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <mi>x</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            
+                            <mrow>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <msup>
+                                <mi>x</mi>
+                                <mn>2</mn>
+                                </msup>
+                            </mrow>
+                            </mfrac>
+                            
+                            <mo>&ThinSpace;</mo>
+                            <mrow>
+                            <mi>d</mi>
+                            <mi>x</mi>
+                            </mrow>
+                        </mrow>
+                        </math>
+                </details>
             </section>
-        </div>
-            <section id="galerie-statica">
+
+                        <section id="galerie-statica">
             <h2>Galerie</h2>
             <div id="grid-galerie" class="grid-galerie">
-                </figure>
                 <figure>
                 <img src="resurse/imagini/shushi1.png" alt="shushi1">
                 <figcaption>Rulou de creveți tempura</figcaption>
@@ -294,14 +410,15 @@
                 </figure>
             </div>
         </section>
-        </div>
+
         <section id="linkuri">
             <h2>Link-uri utile </h2>
             <ul>
             <li><a href="https://www.instagram.com/shibuya.coffee.bucharest/" target="_blank">Pagina de instagram</a></li>
-            <li><a href="https://www.instagram.com/p/DNOcPGfoM8M/" target="_blank">Movie night</a></li>
+            <li><a href="https://www.instagram.com/p/DNOcPGfoM8M/#splash-screen" target="_blank">Movie night</a></li>
             <li><a href="#footer">Subsol</a></li>
             <li><a href="#">Inapoi la titlu</a></li>
+            <li><a href="resurse/imagini/poza_start.png" download="poza_descarcata.png">Poza</a></li>
             </ul>
         </section>
 
@@ -317,12 +434,63 @@
                 <a href="https://www.youtube.com/embed/VN34nnb1HjE" target="ifr-video">Rulou katsu de pui picant</a><br/>
                 </div>
                 <Br>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/VN34nnb1HjE" name="ifr-video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VN34nnb1HjE" name="ifr-video" title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
+            <Br>
+
+            <h2>Uita-ti aici un exemplu de mod de preparare</h2>
+            
+            <iframe 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/8aMuMYYKxDM?playlist=IKrOZQ0HBEM,VN34nnb1HjE,8aMuMYYKxDM&autoplay=1&controls=1&loop=1&mute=1" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+
         </section>
+
+        <section id="meniu-pdf">
+            <h3>Meniul nostru detaliat</h3>         
+            <details>
+                <summary style="cursor: pointer; font-weight: bold; color: #A31D1D;">
+                    Apăsați aici pentru a vizualiza Meniul
+                </summary>
+                
+                <div style="margin-top: 15px;">
+                    <object data="resurse/meniu.pdf" type="application/pdf" style="height: 600px; width: 100%;">
+                        <p>Acest browser nu suportă afișarea directă a documentelor. Vă așteptăm în locație pentru a consulta meniul fizic!</p>
+                    </object>
+                </div>
+            </details>
+        </section>
+
+        </div>
+
     </main>
+
+    <Br>
+
     <footer id="footer">
-        <p><small>Copyright &copy; 2026 Panturu Daniel Ionut</small></p>
+        <div class="container-contacte">
+            <strong>Contact :</strong>
+            <i class="fa-solid fa-phone"></i><a href="tel:+40712345678">0712 345 678</a><br><br>
+            <i class="fa-solid fa-shop"></i> Adresă:<br>
+            <a href="https://www.google.com/maps/search/Facultatea+de+Matematica+si+Informatica" target="_blank">
+                Str. Academiei nr.14, 010014 București<br>
+            </a><br><br>
+            <i class="fa-solid fa-envelope-open"></i> E-mail: <a href="mailto:rezervari@cafenea&sushi.ro">rezervari@cafenea&sushi.ro</a><br><Br>
+                <i class="fa-brands fa-square-instagram"></i><a href="https://www.instagram.com/shibuya.coffee.bucharest/">Instagram</a>
+                <p><small>Copyright &copy; 2026 Panturu Daniel Ionut</small></p>
+        </div>
+        <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.8842997291954!2d26.0995867!3d44.4355355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff472f47f047%3A0x493984726f0235f9!2sFaculty%20of%20Mathematics%20and%20Computer%20Science!5e0!3m2!1sen!2sro!4v1772894471945!5m2!1sen!2sro" 
+            width="600" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div></div><div></div>
     </footer>
 </body>
 </html>
