@@ -1,28 +1,35 @@
 body
 {
-    background-color: var(--culoare_fudal_exterior);
+    background-color: var(--culoare_fundal_exterior);
     font-family: "Merriweather", serif;
     padding: 0;
     margin: 0;
+    font-size: var(--dimensiuine_text);
+    transition: all 0.3s linear;
 
-    --culoare_fudal_interior:rgb(193, 205, 146);
-    --culoare_fudal_exterior:rgb(164, 137, 47);
+    --culoare_fundal_exterior:#FFBC38;
+    --culoare_fundal_interior:#FFE68D;
+    --culoare2:#FFEC38;
+    --culoare3:#FFD539;
+    --culoare4:#FFA038;
     --culoare_contur:rgb(0, 0, 0);
     --dimensiune_figuri:500px;
     --margine_pagina:100px;
+    --dimensiuine_text: 16px
 
-
+    
+    
 }
 
 section{
-    background-color: var(--culoare_fudal_interior);
+    background-color: var(--culoare_fundal_interior);
     border: 1px solid var(--culoare_contur);
-    padding: 10px 10px 10px 10px;
+    padding:10px;
     box-shadow: 0 0 5px var(--culoare_contur); 
 }
 
 header{
-    background-color: var(--culoare_fudal_exterior);
+    background-color: var(--culoare_fundal_exterior);
     padding: 10px;
     margin: 0;
 }
@@ -40,7 +47,7 @@ header > h1
 
 p
 {
-    color:var(--culoare_fudal)
+    color:var(--culoare_fundal)
 }
 
 /*comentariu*/
@@ -52,13 +59,7 @@ main
 
 figure{
     margin:0;
-    background-color: var(--culoare_fudal_interior);
-}
-
-figure.fg-img> img{
-    height: var(--dimensiune_figuri);
-    width: var(--dimensiune_figuri);
-    
+    background-color: var(--culoare_fundal_interior);
 }
 
 footer, .flex-row{
@@ -84,11 +85,18 @@ footer, .flex-row{
     height: 400px;
 }
 
-.container-iframe a{
+/* .container-iframe a{
     border: 2px solid purple;
     margin-left: 10px;
     padding: 3px;
     
+} */
+
+.container-iframe{
+    margin-right: 20%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
 }
 
 .smythe{
@@ -110,9 +118,130 @@ footer, .flex-row{
     height: 100%;
 }
 
+.iframe_cu_butoane
+{
+    width: 80%;
+    aspect-ratio: 16 / 9;
+}
+
+.taburi-iframe
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.taburi-iframe >a{
+    display: inline-block;
+    padding: 10px;
+    color: red;
+    border: 1px solid var(--culoare_contur);
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    text-decoration: none;
+    transition: all 0.15s linear;
+}
+
+.taburi-iframe >a:hover{
+    background-color: aliceblue;
+    color: blueviolet;
+}
+
+.math-decorat {
+    font-size: 1.8rem ;
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+    margin: 20px auto ;
+    width: 100%;
+}
+
+.math-decorat * {
+    font-size: inherit;
+}
+
+.m-integral {
+    color: #2c3e50;
+}
+
+.m-limita {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 0.6em ;
+}
+
+.m-functie {
+    color: #27ae60;
+    font-style: italic;
+}
+
+.m-variabila {
+    color: #2980b9;
+}
+
+.m-exponent {
+    color: #8e44ad;
+    font-size: 0.6em ;
+}
+
+.PLACEHOLDER{
+
+    height: 300px;
+    align-items: center;
+}
+
+.container-tabel {
+    width: 100%;
+    overflow-x: auto;
+}
+
 #tab-orar {
-    border-spacing: 15px; 
-}   
+    width: 100%;
+    border-collapse: collapse;
+    border: 5px double var(--culoare_contur, black);
+}
+
+#tab-orar th, 
+#tab-orar td {
+    border: 1px solid var(--culoare_contur, black);
+    padding: 10px;
+    text-align: center;
+    transition: all 0.75s linear;
+}
+
+#tab-orar th:nth-child(odd),
+#tab-orar td:nth-child(odd) {
+    color: #5A3825; 
+}
+
+#tab-orar th:nth-child(even),
+#tab-orar td:nth-child(even) {
+    color: #C33C23; 
+}
+
+#tab-orar tbody tr:nth-child(even) {
+    background-color: var(--culoare2, #FFEC38);
+}
+
+#tab-orar tbody tr:hover td {
+    background-color: #333333;
+    border: 5px solid black;
+}
+
+#tab-orar tbody tr:hover td:nth-child(odd),
+#tab-orar tbody tr:hover td:nth-child(even) {
+    color: white;
+}
+
+#tab-orar caption {
+    caption-side: bottom; 
+    padding-top: 10px;   
+    font-style: italic;  
+    font-weight: bold;
+}
+
+.exceptie-tabel{
+    background-color: var(--culoare_fundal_interior);
+}
 
 #tabel-ocupatie td {
     padding: 10px;
@@ -122,33 +251,42 @@ footer, .flex-row{
 #grid-pagina
 {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:"welcome welcome welcome welcome" 
+                           "orar orar evenimente evenimente"
+                           "orar orar anunturi anunturi"
+			               "utilizatori-online utilizatori-statistici utilizatori-statistici site-server"
+			               "rest-continut rest-continut rest-continut rest-continut";
+}
+
+#rest-continut
+{
+    padding: 0;
+    margin: 0;
+    grid-area: rest-continut;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas:"welcome welcome welcome" 
-                       "promotii promotii evenimente"
-                       "fig1 produse produse"
-                        "fig2 produse produse"
-                        "fig3 produse produse"
-                        "anunturi orar orar"
+    grid-template-areas:"promotii promotii promotii"
+                       "figuri produse produse"
+                        "figuri produse produse"
+                        "figuri produse produse"
                         "intrebari intrebari intrebari"
                         "galerie galerie galerie"
                         "retete retete linkuri"
                         "meniu meniu meniu";
-
 }
 
-#grid-pagina > *
-{
-    border: 1px solid var(--culoare_contur);
-    padding: 10px 10px 10px 10px;
-    box-shadow: 0 0 5px var(--culoare_contur);
 
+#grid-pagina > *:not(#rest-continut),
+#rest-continut > * {
+    border: 1px solid var(--culoare_contur);
+    padding: 10px;
+    box-shadow: 0 0 5px var(--culoare_contur);
 }
 
 #welcome img {
     height: 600px;
 }
-
-
 #welcome{
     grid-area: welcome;
 }
@@ -161,16 +299,7 @@ footer, .flex-row{
 #orar{
     grid-area: orar;
 }
- 
-#fig1{
-    grid-area: fig1;
-}
-#fig2{
-    grid-area: fig2;
-}
-#fig3{
-    grid-area: fig3;
-}
+
 #produse{
     grid-area: produse;
 }
@@ -198,32 +327,110 @@ footer, .flex-row{
     grid-area: meniu;
 }
 
-@font-face {
-  font-family: Smythe; 
-  src: url(resurse\font\Smythe-Regular.ttf);
+#utilizatori-online
+{
+    grid-area: utilizatori-online;
 }
 
-@media screen and (max-width:1200px)
- {
-    
-    body{
-        --margine_pagina:80px;
+#utilizatori-statistici{
+    grid-area: utilizatori-statistici;
+}
+
+#site-server{
+    grid-area: site-server;
+}
+
+figure.fg-img > img {
+    /* Facem imaginea flexibilă ca să încapă în coloana de 1fr */
+    width: 100%; 
+    max-width: var(--dimensiune_figuri); /* maxim 500px, dar se micșorează dacă e nevoie */
+    height: auto; /* păstrează proporțiile imaginii */
+}
+
+#container-figuri{
+    grid-area: figuri;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#link-top {
+    position: fixed;
+    bottom: 0.5em;
+    right: 0.5em;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: #e0e0e0;
+    opacity: 0.5;
+    border-top: 5px solid #333;
+    border-bottom: 5px solid #333;
+    border-left: 5px solid #bbb;
+    border-right: 5px solid #bbb;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    transition: all 600ms linear;
+}
+
+#link-top span {
+    font-size: 2rem;
+    color: black;
+    display: block;
+    filter: blur(3px);
+    transition: all 600ms linear;
+}
+
+#link-top:hover {
+    opacity: 1;
+    transform: rotate(360deg);
+}
+
+#link-top:hover span {
+    filter: blur(0);
+    transform: rotate(-360deg);
+}
+
+@media screen and (max-width:1200px) {
+    body {
+        --margine_pagina: 80px;
+        --dimensiuine_text: 14px;
     }
 
-    #grid-pagina{
-    grid-template-columns: 2fr 2fr;
-    grid-template-areas:
-                "welcome welcome" 
-                "promotii anunturi"
-                "evenimente evenimente" 
-                "fig1 orar"
-                "fig2 orar"
-                "fig3 orar"
-                "produse produse"
-                "intrebari intrebari" 
-                "galerie galerie"
-                "retete linkuri"
-                "meniu meniu";
+    body * {
+        animation: none ;
+    }
+
+    .container-tabel {
+        width: 100%;
+        overflow-x: auto;
+        display: block; 
+    }
+
+    #grid-pagina {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "welcome welcome" 
+            "orar evenimente" 
+            "anunturi anunturi"
+            "utilizatori-online utilizatori-statistici"
+            "site-server site-server"
+            "rest-continut rest-continut";
+    }
+
+    #rest-continut {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "promotii promotii"
+            "figuri produse"
+            "intrebari intrebari"
+            "galerie galerie"
+            "retete linkuri"
+            "meniu meniu";
     }
 
     #tab-orar {
@@ -231,18 +438,22 @@ footer, .flex-row{
     } 
 }
 
-@media screen and (max-width:800px)
- {
-    
-    body{
-        --margine_pagina:50px;
-    }
-    #grid-pagina
-    {
-        display: block;
+@media screen and (max-width:800px) {
+    body {
+        --margine_pagina: 20px;
+        --dimensiuine_text: 12px;
     }
 
-        #tab-orar {
+    body * {
+        animation: none ;
+    }
+
+    #grid-pagina, #rest-continut {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #tab-orar {
         border-spacing: 0; 
     } 
 }
