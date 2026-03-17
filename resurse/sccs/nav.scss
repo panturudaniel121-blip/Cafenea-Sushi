@@ -1,12 +1,11 @@
+$nul:0;
+
+
 nav
 {
+
     --latime_buton:200px;
     --inaltime_buton:50px;
-    --culoare_fundal_exterior:#FFBC38;
-    --culoare_fundal_interior:#FFE68D;
-    --culoare2:#FFEC38;
-    --culoare3:#FFD539;
-    --culoare4:#FFA038;
 }
 
 ul.meniu{
@@ -18,14 +17,16 @@ ul.meniu{
 ul.meniu ul{
     display: none;
     animation: animatie_submeniu 0.3s linear;
-    transform-origin: 0 0;
+    transform-origin: $nul $nul;
 }
 
-ul.meniu, ul.meniu ul{
-    position: relative;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+ul.meniu, ul.meniu {
+    ul{
+        position: relative;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
 }
 
 .text-icon, .imag-icon{
@@ -39,20 +40,18 @@ ul.meniu, ul.meniu ul{
 ul.meniu li{
     width: var(--latime_buton);
     height: var(--inaltime_buton);
+    color: red;
     border: 1px solid var(--culoare_contur);
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
     transition: all 0.15s linear;
     text-align: center;
     font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.0);
 }
 
 ul.meniu li:hover{
-    background-color: var(--culoare4);
-    color: rgb(0, 0, 0);
-    font-weight: bolder;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: rgb(33, 66, 96);
+    color: rgb(216, 204, 226);
 }
 
 ul.meniu li{
@@ -70,10 +69,8 @@ ul.meniu>li:hover ul{
     z-index: 1;
 }
 
-ul.meniu li a{
-    color: black;
-    text-decoration: none;
-}
+
+
 @keyframes animatie_submeniu{
     0%{opacity: 0%;transform: scale(0,0);}
     50%{transform: scale(0.5,1);}

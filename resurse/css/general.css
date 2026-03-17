@@ -15,7 +15,8 @@ body
     --culoare_contur:rgb(0, 0, 0);
     --dimensiune_figuri:500px;
     --margine_pagina:100px;
-    --dimensiuine_text: 16px
+    --dimensiuine_text: 16px;
+    --padding_zone: 15px;
 
     
     
@@ -32,10 +33,15 @@ header{
     background-color: var(--culoare_fundal_exterior);
     padding: 10px;
     margin: 0;
+    border: black solid 4px;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+
+    
 }
 
 header > *{
-        font-weight: bold;
+    font-weight: bold;
 }
 
 header > h1 
@@ -43,6 +49,12 @@ header > h1
     margin: 0;
     font-size: 60px;
 
+}
+
+header {
+    border-top: none;
+    border-right: none;
+    border-left: none;
 }
 
 p
@@ -61,8 +73,21 @@ figure{
     margin:0;
     background-color: var(--culoare_fundal_interior);
 }
+footer{
+    border: black solid 4px;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;   
+    background-color: var(--culoare_fundal_exterior);
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    padding: var(--padding_zone);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
 
-footer, .flex-row{
+.flex-row{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -81,9 +106,16 @@ footer, .flex-row{
     flex-direction: row;
 }
 
-.grid-galerie figure img {
-    height: 400px;
+.grid-galerie figure{
+    margin-left:3%;
+    margin-right: 3%;
+    width: 27%;
 }
+
+.grid-galerie figure img {
+    width: 100%;
+}
+
 
 /* .container-iframe a{
     border: 2px solid purple;
@@ -116,6 +148,7 @@ footer, .flex-row{
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
+    margin-right: 10%;
 }
 
 .iframe_cu_butoane
@@ -133,17 +166,18 @@ footer, .flex-row{
 .taburi-iframe >a{
     display: inline-block;
     padding: 10px;
-    color: red;
+    color: black;
     border: 1px solid var(--culoare_contur);
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
     text-decoration: none;
     transition: all 0.15s linear;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.0);
 }
 
 .taburi-iframe >a:hover{
-    background-color: aliceblue;
-    color: blueviolet;
+    background-color: var(--culoare4);
+    color: black;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .math-decorat {
@@ -194,10 +228,12 @@ footer, .flex-row{
     overflow-x: auto;
 }
 
+
 #tab-orar {
     width: 100%;
     border-collapse: collapse;
     border: 5px double var(--culoare_contur, black);
+    gap: 15px;
 }
 
 #tab-orar th, 
@@ -248,6 +284,13 @@ footer, .flex-row{
     border-spacing: 15px;
 }
 
+.imagine_redimensionala {
+    width: 85%;
+    height: auto;
+    aspect-ratio: 10 / 9;
+}
+
+
 #grid-pagina
 {
     display: grid;
@@ -284,9 +327,6 @@ footer, .flex-row{
     box-shadow: 0 0 5px var(--culoare_contur);
 }
 
-#welcome img {
-    height: 600px;
-}
 #welcome{
     grid-area: welcome;
 }
@@ -341,10 +381,9 @@ footer, .flex-row{
 }
 
 figure.fg-img > img {
-    /* Facem imaginea flexibilă ca să încapă în coloana de 1fr */
     width: 100%; 
-    max-width: var(--dimensiune_figuri); /* maxim 500px, dar se micșorează dacă e nevoie */
-    height: auto; /* păstrează proporțiile imaginii */
+    max-width: var(--dimensiune_figuri); 
+    height: auto;
 }
 
 #container-figuri{
@@ -412,14 +451,13 @@ figure.fg-img > img {
     }
 
     #grid-pagina {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-template-areas:
-            "welcome welcome" 
-            "orar evenimente" 
-            "anunturi anunturi"
-            "utilizatori-online utilizatori-statistici"
-            "site-server site-server"
-            "rest-continut rest-continut";
+                "welcome welcome welcome" 
+                "orar orar evenimente" 
+                "orar orar anunturi"
+                "utilizatori-online utilizatori-statistici site-server"
+                "rest-continut rest-continut rest-continut";
     }
 
     #rest-continut {
@@ -435,7 +473,10 @@ figure.fg-img > img {
 
     #tab-orar {
         border-spacing: 7px; 
+        gap: 10px;
     } 
+
+
 }
 
 @media screen and (max-width:800px) {
@@ -448,6 +489,10 @@ figure.fg-img > img {
         animation: none ;
     }
 
+    footer{
+        display: block;
+    }
+
     #grid-pagina, #rest-continut {
         display: flex;
         flex-direction: column;
@@ -455,5 +500,14 @@ figure.fg-img > img {
 
     #tab-orar {
         border-spacing: 0; 
+        gap: 5px;
     } 
+
+    .flex-row {
+        display: block;
+    }
+
+    .grid-galerie{
+        display: block;
+    }
 }

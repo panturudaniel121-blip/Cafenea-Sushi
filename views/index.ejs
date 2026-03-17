@@ -1,66 +1,17 @@
 <!DOCTYPE html>
 <html lang="ro">
     <head>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+        <title>Cafenea & Sushi</title>
         <meta name="keywords" content="cafenea,sushi,cafea,cafeaua">
         <meta name="description" content="Vizitati-ne pentru cafea intensa și BAUTURI premium.">
-        <meta name="author" content="Panturu Daniel Ionut">
-
-        <link rel="icon" type="image/png" href="/resurse/imagini/favicon/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="/resurse/imagini/favicon/favicon.svg" />
-        <link rel="shortcut icon" href="/resurse/imagini/favicon/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/resurse/imagini/favicon/apple-touch-icon.png" />
-        <meta name="apple-mobile-web-app-title" content="MyWebSite" />
-        <link rel="manifest" href="/resurse/imagini/favicon/site.webmanifest" />
-
-        <link rel="stylesheet" href="/resurse/css/resetare.css"/>
-        <link rel="stylesheet" href="/resurse/css/general.css"/>
-        <link rel="stylesheet" href="/resurse/css/nav.css"/>
-        <link rel="stylesheet" href="/resurse/css/nav700.css" media="screen and (max-width: 1000px)">
-        <link rel="stylesheet" href="/resurse/css/nav700.css" media="screen and (max-width: 700px)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
-
-        <title>Cafenea & Sushi</title>
+        <% -include("../fragmente/head.ejs") %>
+        
     </head>
 
     <body>
         <header>
-            <h1  class="pacifico" >Cafenea &amp; Sushi <i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i></h1>
-            <nav>
-
-                <label id="hamburger" for="ch-menu">
-                    <img src="/resurse/imagini/Hamburger_icon_alb.png" alt="menu">    
-                </label>
-                <input type="checkbox" id="ch-menu"/>
-                <h2>Navigare </h2>
-                <ul class="meniu">
-                    <li>Acasa
-                        <ul >
-                            <li><a href="#welcome">Welcome</a></li>
-                            <li><a href="#promotii">Promoții</a></li>
-                            <li><a href="#produse">Produsele</a></li>
-                            <li><a href="#linkuri">Link-uri utile</a></li>
-                            <li><a href="#anunturi">Anunturi</a></li>
-                            <li><a href="#index-intrebari">Intrebari frecvente</a></li>
-                            <li><a href="#galerie-statica">Galerie</a></li>
-                            <li><a href="#retete">Retete</a></li>
-                            <li><a href="#meniu-pdf">Meniu</a></li>
-                            <li><a href="#footer">Subsol</a></li>
-                        </ul>
-                    </li>
-                    <li>Meniu</li>
-                    <li>Evenimente</li>
-                    <li>Rezervari</li>
-                </ul>
-            </nav>
+            <h1 class="pacifico">Cafenea &amp; Sushi <i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i></h1>
+            <% -include("../fragmente/header.ejs") %>
             <br>
             <br>
         </header>
@@ -83,7 +34,10 @@
                             <div id="dv-prezentare">
                                 <figure>
                                     <picture title="Cafeaua zilei">
-                                        <img src="/resurse/imagini/cafeau_zilei600.jpg" alt="cafea" class="imagine_redimensionala">
+                                        <!-- il ia pe primul care se potriveste cu query-ul din media-->
+                                        <source srcset="/resurse/imagini/cafeau_zilei200.jpg" media="(max-width:700px)"/>
+                                        <source srcset="/resurse/imagini/cafeau_zilei400.jpg" media="(max-width:1200px)"/>
+                                        <img src="/resurse/imagini/cafeau_zilei600.jpg" alt="cafea"/>
                                     </picture>
                                     <figcaption>Cafeaua zilei</figcaption>
                                 </figure>
@@ -95,7 +49,7 @@
                             <p>Apasa pe ce esti interesat sa afli si vei fi redirectionat automat la wikipedia!</p>
                             <br>
                             <br>
-                            <img src="/resurse/imagini/cafea&sushi.png" alt="Masă cu sushi și cafea" usemap="#harta_produse" class="imagine_redimensionala">
+                            <img src="/resurse/imagini/cafea&sushi.png" alt="Masă cu sushi și cafea" usemap="#harta_produse">
 
                             <map name="harta_produse">
                                 <area shape="poly" coords="82,319,64,143,128,146,143,297" title="cafea" href="https://ro.wikipedia.org/wiki/Cafea" target="_blank" alt="cafea">
@@ -423,7 +377,7 @@
                 <h2>Galerie</h2>
                 <div id="grid-galerie" class="grid-galerie">
                     <figure>
-                    <img src="/resurse/imagini/shushi1.png" alt="shushi1">
+                    <img src="//imagini/shushi1.png" alt="shushi1">
                     <figcaption>Rulou de creveți tempura</figcaption>
                     </figure>
                     <figure>
@@ -467,11 +421,12 @@
                 <h2>Uita-ti aici un exemplu de mod de preparare</h2>
                 
                 <iframe 
+                    width="560" 
+                    height="315" 
                     src="https://www.youtube.com/embed/8aMuMYYKxDM?playlist=IKrOZQ0HBEM,VN34nnb1HjE,8aMuMYYKxDM&autoplay=1&controls=1&loop=1&mute=1" 
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    class="iframe_cu_butoane"
                     allowfullscreen>
                 </iframe>
 
@@ -496,29 +451,6 @@
             </div>
         </main>
         <Br>
-        <footer id="footer">
-            <br>
-            <br>
-            <br>
-            
-            <div class="container-contacte">
-                <a href="#" id="link-top" title="Apasă pentru a reveni la începutul paginii">
-                    <span>&#8593;</span>
-                </a>
-                <strong>Contact :</strong>
-                <i class="fa-solid fa-phone"></i><a href="tel:+40712345678">0712 345 678</a><br><br>
-                <i class="fa-solid fa-shop"></i> Adresă:<br>
-                <a href="https://www.google.com/maps/search/Facultatea+de+Matematica+si+Informatica" target="_blank">
-                    Str. Academiei nr.14, 010014 București<br>
-                </a><br><br>
-                <i class="fa-solid fa-envelope-open"></i> E-mail: <a href="mailto:rezervari@cafenea&sushi.ro">rezervari@cafenea&sushi.ro</a><br><Br>
-                    <i class="fa-brands fa-square-instagram"></i><a href="https://www.instagram.com/shibuya.coffee.bucharest/">Instagram</a>
-                    <p><small>Copyright &copy; 2026 Panturu Daniel Ionut</small></p>
-            </div>
-            <div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.8842997291954!2d26.0995867!3d44.4355355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff472f47f047%3A0x493984726f0235f9!2sFaculty%20of%20Mathematics%20and%20Computer%20Science!5e0!3m2!1sen!2sro!4v1772894471945!5m2!1sen!2sro" 
-                width="600" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </footer>
+        <% -include("../fragmente/footer.ejs") %>
     </body>
 </html>
