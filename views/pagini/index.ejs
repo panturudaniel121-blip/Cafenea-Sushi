@@ -4,73 +4,80 @@
         <title>Cafenea & Sushi</title>
         <meta name="keywords" content="cafenea,sushi,cafea,cafeaua">
         <meta name="description" content="Vizitati-ne pentru cafea intensa și BAUTURI premium.">
-        <% -include("../fragmente/head.ejs") %>
+        <%- include("../fragmente/head.ejs") %>
         
     </head>
 
     <body>
         <header>
             <h1 class="pacifico">Cafenea &amp; Sushi <i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i></h1>
-            <% -include("../fragmente/header.ejs") %>
-            <br>
-            <br>
+            <%-  include("../fragmente/nav.ejs") %>
         </header>
         <Br>
         <main> <!--  comentariu -->
-
+            
             <div id="grid-pagina">
-
                 <section id="welcome">
-                    <div class="flex-row">
-                        <div>
-                            <hgroup>
-                                <h2>Bine ati venit</h2>
-                                <p class="subtitlu">pe site-ul nostru</p>
-                            </hgroup>
-                            <p class="intro">Vă mulțumim că ne vizitați site-ul. Vă invităm la cafeaua de dimineată și la un sushi delicios.</p>
+                <h2>Bine ati venit </h2>
+                <div class="flex-row">
+                    <div>
+                        <hgroup>
+                            <p id="watermark"></p>
+                            <p class="subtitlu">pe site-ul nostru</p>
+                        </hgroup>
+                        <p class="intro">Vă mulțumim că ne vizitați site-ul. Vă invităm la cafeaua de dimineată și la un sushi delicios.</p>
 
-                            <p class="anunt intro">Puteți alege din marea noastră varietate de cafele si</p>
+                        <p class="anunt intro">Puteți alege din marea noastră varietate de cafele si</p>
 
-                            <div id="dv-prezentare">
-                                <figure>
-                                    <picture title="Cafeaua zilei">
-                                        <!-- il ia pe primul care se potriveste cu query-ul din media-->
-                                        <source srcset="/resurse/imagini/cafeau_zilei200.jpg" media="(max-width:700px)"/>
-                                        <source srcset="/resurse/imagini/cafeau_zilei400.jpg" media="(max-width:1200px)"/>
-                                        <img src="/resurse/imagini/cafeau_zilei600.jpg" alt="cafea"/>
-                                    </picture>
-                                    <figcaption>Cafeaua zilei</figcaption>
-                                </figure>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h2>Vrei sa te informezi despre originea cafelei si a sushi-ului? </h2>
-                            <p>Apasa pe ce esti interesat sa afli si vei fi redirectionat automat la wikipedia!</p>
-                            <br>
-                            <br>
-                            <img src="/resurse/imagini/cafea&sushi.png" alt="Masă cu sushi și cafea" usemap="#harta_produse">
-
-                            <map name="harta_produse">
-                                <area shape="poly" coords="82,319,64,143,128,146,143,297" title="cafea" href="https://ro.wikipedia.org/wiki/Cafea" target="_blank" alt="cafea">
-                                <area shape="poly" coords="241,123,248,296,438,314,330,108,383,127,414,163,439,184" title="cafea" href="https://ro.wikipedia.org/wiki/Cafea" target="_blank" alt="cafea">
-                                <area shape="poly" coords="121,363,152,313,406,331,410,389" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi" target="_blank" alt="sushi">
-                                <area shape="poly" coords="28,234,14,293,65,242,64,296" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi" target="_blank" alt="sushi">
-                                <area shape="poly" coords="148,239,150,293,227,235,240,293" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi" target="_blank" alt="sushi">
-                            </map>
+                        <div id="dv-prezentare">
+                            <figure>
+                                <picture title="Cafeaua zilei">
+                                    <!-- il ia pe primul care se potriveste cu query-ul din media-->
+                                    <source srcset="/resurse/imagini/cafeau_zilei200.jpg" media="(max-width:700px)"/>
+                                    <source srcset="/resurse/imagini/cafeau_zilei400.jpg" media="(max-width:1200px)"/>
+                                    <img src="/resurse/imagini/cafeau_zilei600.jpg" alt="cafea"/>
+                                </picture>
+                                <figcaption>Cafeaua zilei</figcaption>
+                            </figure>
                         </div>
                     </div>
-                </section>
-            <!-- <div id="container-video">
-                <div id="centrare-video">
-                    <div id="clip-video">
-                        <div id="stil-video">
-                            <video width="320" height="240" playsinline autoplay loop muted>
-                                </video>
-                        </div>
+
+                    <div>
+                        <h2>Vrei sa te informezi despre originea cafelei si a sushi-ului? </h2>
+                        <p>Apasa pe ce esti interesat sa afli si vei fi redirectionat automat la wikipedia!</p>
+                        <img src="/resurse/imagini/cafea&sushi.png" alt="Masă cu sushi și cafea" usemap="#harta_produse">
+
+                        <map name="harta_produse">
+                            <area shape="poly" coords="82,319,64,143,128,146,143,297" title="cafea" href="https://ro.wikipedia.org/wiki/Cafea" target="_blank" alt="cafea">
+                            <area shape="poly" coords="241,123,248,296,438,314,330,108,383,127,414,163,439,184" title="cafea" href="https://ro.wikipedia.org/wiki/Cafea" target="_blank" alt="cafea">
+                            <area shape="poly" coords="121,363,152,313,406,331,410,389" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi" target="_blank" alt="sushi">
+                            <area shape="poly" coords="28,234,14,293,65,242,64,296" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi" target="_blank" alt="sushi">
+                            <area shape="poly" coords="148,239,150,293,227,235,240,293" title="sushi" href="https://ro.wikipedia.org/wiki/Sushi" target="_blank" alt="sushi">
+                        </map>
                     </div>
                 </div>
-            </div>  -->
+                <br>
+                <details class="details-video">
+                    <summary>Making of onigiri - video <i class="fa-solid fa-hand-pointer"></i> </summary>
+
+                    <div id="container-video">
+                        <div id="centrare-video">
+                            <div id="clip-video">
+                                <div id="stil-video">
+                                    <video width="320" height="240"  playsinline autoplay loop muted preload="metadata">
+                                        <source src="/resurse/video/Making_of_onigiri.mp4" type="video/mp4">
+                                        <source src="/resurse/video/Making_of_onigiri.mov" type="video/mov">
+                                        <track default src="data:text/vtt;charset=utf-8,WEBVTT%0A%0A00%3A00.000%20--%3E%2000%3A03.000%20line%3A50%25%20align%3Amiddle%0AMaking%20of%20onigiri%0A%0A00%3A03.000%20--%3E%2000%3A06.500%0ADeci%20se%20taie%20aia%20si%20apoi%20se%20apasa%20ala%20in%20forma%0A%0A00%3A06.500%20--%3E%2000%3A08.000%0ASe%20impatureste%20bine%20in%20aia%0A%0A00%3A09.000%20--%3E%2000%3A13.000%0ASe%20da%20cu%20chestii%20peste%20si%20aia%20e%20%0A%0A00%3A13.000%20--%3E%2000%3A14.500%0AA%2C%20se%20mai%20pune%20altceva%20peste.%20%0A%0A00%3A14.500%20--%3E%2000%3A16.500%0ACe%20unghii%20are%20emoloaica%20%F0%9F%98%AD%F0%9F%98%AD%F0%9F%98%AD" kind="captions" srclang="ro" label="Română">
+    
+                                        <track src="data:text/vtt;charset=utf-8,WEBVTT%0A%0A00%3A00.000%20--%3E%2000%3A03.000%20line%3A50%25%20align%3Amiddle%0AMaking%20of%20onigiri%0A%0A00%3A03.000%20--%3E%2000%3A06.500%0ASo%20they%20cut%20that%20thing%20and%20then%20press%20the%20other%20thing%20in%20the%20mold%0A%0A00%3A06.500%20--%3E%2000%3A08.000%0AYou%20wrap%20it%20up%20real%20good%20in%20that%20thing%0A%0A00%3A09.000%20--%3E%2000%3A13.000%0AYou%20sprinkle%20some%20stuff%20on%20top%20and%20that%27s%20it%0A%0A00%3A13.000%20--%3E%2000%3A14.500%0AOh%20wait%2C%20something%20else%20goes%20on%20top.%20%0A%0A00%3A14.500%20--%3E%2000%3A16.500%0ALook%20at%20the%20emo%20girl%27s%20nails%20%F0%9F%98%AD%F0%9F%98%AD%F0%9F%98%AD" kind="captions" srclang="en" label="English">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+            </section>
                 
 
                 <section id="evenimente">
@@ -182,7 +189,7 @@
                         E adevărat că doar studiile noastre făcute în spate la bistro, dar astea sunt detalii. </p>
                 </section>
 
-                <section id="utilizatori-online" class="PLACEHOLDER">PLACEHOLDER</section>
+                <section id="utilizatori-online" class="PLACEHOLDER">IP: <%- locals.ip %></section>
                 <section id="utilizatori-statistici">PLACEHOLDER</section>
                 <section id="site-server">PLACEHOLDER</section>
 
@@ -377,7 +384,7 @@
                 <h2>Galerie</h2>
                 <div id="grid-galerie" class="grid-galerie">
                     <figure>
-                    <img src="//imagini/shushi1.png" alt="shushi1">
+                    <img src="/resurse/imagini/shushi1.png" alt="shushi1">
                     <figcaption>Rulou de creveți tempura</figcaption>
                     </figure>
                     <figure>
@@ -451,6 +458,6 @@
             </div>
         </main>
         <Br>
-        <% -include("../fragmente/footer.ejs") %>
+        <%- include("../fragmente/footer.ejs") %>
     </body>
 </html>

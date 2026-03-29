@@ -1,0 +1,194 @@
+$latime_buton: 160px;
+$inaltime_buton: 35px;
+$culoare2:#FFEC38;
+$culoare4:#FFA038;
+$culoare3:#FFD539;
+$culoare_contur:rgb(0, 0, 0);
+
+%nu_afiseaza{
+    display: none;
+}
+
+
+%div_hamburger{
+    margin-bottom: 0.5em;
+    width: 3.5em;
+    height: 1em;
+    border-radius: 0.5em;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+ul.meniu {
+  display: flex;
+  height: 40px;
+
+  ul {
+    @extend %nu_afiseaza;
+    animation: animatie_submeniu 0.3s linear;
+    transform-origin: top;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  li {
+    position: relative;
+    gap: 8px;
+    width: $latime_buton;
+    height: $inaltime_buton;
+    background-color: $culoare4 ;
+    color: rgb(0, 0, 0);
+    border: 1px solid $culoare_contur;
+    border-radius: 24px;
+    transition: all 0.3s linear;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    text-shadow: 0px -50px rgba(0, 0,0,0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $culoare2;
+      text-shadow: 0px 0px rgba(0, 0,0,1);
+
+
+      > ul {
+        display: block;
+        position: absolute;
+        top: 100%;   
+        left: 0;    
+        z-index: 10;
+        
+        > li        {
+            text-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: none;
+
+            &:hover {
+                text-shadow: none;
+                background-color: $culoare3;
+            }
+
+            >a{
+            text-decoration: none;
+            color: black;
+            }
+          }
+        }
+      }
+
+    p{
+        display: inline-block;
+        margin: 0;
+    }
+
+    i{
+        margin: 0;
+    }
+}
+}
+
+.text-icon, .imag-icon {
+    display: inline-block;
+}
+
+#ch-menu {
+    @extend %nu_afiseaza;
+}
+
+//timp din enunt
+$t: 300ms; 
+#hamburger{
+    @extend %nu_afiseaza;
+        div.div-container-hamburger{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: transparent ;
+            width: 10px;
+
+        @for $i from 1 through 3 {
+            .div-hamburger#{$i} {
+                @extend %div_hamburger;
+                animation: anim-hamburger#{$i} 0.3s linear forwards;
+                animation-delay: ($i - 1) * $t;
+            }
+        }
+    }
+}
+
+
+@keyframes animatie_submeniu {
+  0% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  50% {
+    transform: scale(0.5, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes anim-hamburger1 {
+  0% {
+    opacity: 0;
+    transform: rotate(-45deg);
+    background-color: rgb(255, 255, 255);
+  }
+  50% {
+    transform: scale(0.5, 1);
+    background-color: rgb(200, 200, 200);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+    background-color: rgb(209, 245, 2);
+  }
+}
+
+@keyframes anim-hamburger2 {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg);
+    background-color: rgb(255, 255, 255);
+  }
+  50% {
+    transform: scale(0.5, 1);
+    background-color: rgb(200, 200, 200);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+    background-color: rgb(155, 249, 169);
+  }
+}
+
+@keyframes anim-hamburger3 {
+  0% {
+    opacity: 0;
+    transform: rotate(-90deg);
+    background-color: rgb(255, 255, 255);
+  }
+  50% {
+    transform: scale(0.5, 1);
+    background-color: rgb(200, 200, 200);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+    background-color: rgb(73, 236, 190);
+  }
+}

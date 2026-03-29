@@ -18,9 +18,10 @@
         <link rel="stylesheet" href="/resurse/css/resetare.css"/>
         <link rel="stylesheet" href="/resurse/css/general.css"/>
         <link rel="stylesheet" href="/resurse/css/nav.css"/>
-        <link rel="stylesheet" href="/resurse/css/nav700.css" media="screen and (max-width: 1000px)">
+        <link rel="stylesheet" href="/resurse/css/nav1000.css" media="screen and (max-width: 1000px)">
         <link rel="stylesheet" href="/resurse/css/nav700.css" media="screen and (max-width: 700px)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+        <link rel="stylesheet" href="/resurse/css/css-printare.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,14 +36,13 @@
         <header>
             <h1  class="pacifico" >Cafenea &amp; Sushi <i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i></h1>
             <nav>
-
+                <h2>Navigare </h2>
                 <label id="hamburger" for="ch-menu">
                     <img src="/resurse/imagini/Hamburger_icon_alb.png" alt="menu">    
                 </label>
                 <input type="checkbox" id="ch-menu"/>
-                <h2>Navigare </h2>
                 <ul class="meniu">
-                    <li>Acasa
+                    <li><p>Acasa</p> <i class="fa-solid fa-house-user"></i>
                         <ul >
                             <li><a href="#welcome">Welcome</a></li>
                             <li><a href="#promotii">Promoții</a></li>
@@ -56,9 +56,9 @@
                             <li><a href="#footer">Subsol</a></li>
                         </ul>
                     </li>
-                    <li>Meniu</li>
-                    <li>Evenimente</li>
-                    <li>Rezervari</li>
+                    <li><p>Meniu</p> <i class="fa-solid fa-grip"></i></li>
+                    <li><p>Evenimente</p> <i class="fa-solid fa-flag"></i></li>
+                    <li><p>Rezervari</p> <i class="fa-solid fa-calendar-check"></i></li>
                 </ul>
             </nav>
             <br>
@@ -70,6 +70,7 @@
             <div id="grid-pagina">
 
                 <section id="welcome">
+                    <p id="watermark"></p>
                     <div class="flex-row">
                         <div>
                             <hgroup>
@@ -464,7 +465,7 @@
                 </div>
                 <Br>
 
-                <h2>Uita-ti aici un exemplu de mod de preparare</h2>
+                <h2 class="h2-ascuns">Uita-ti aici un exemplu de mod de preparare</h2>
                 
                 <iframe 
                     src="https://www.youtube.com/embed/8aMuMYYKxDM?playlist=IKrOZQ0HBEM,VN34nnb1HjE,8aMuMYYKxDM&autoplay=1&controls=1&loop=1&mute=1" 

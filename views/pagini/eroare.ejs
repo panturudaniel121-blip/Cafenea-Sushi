@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html  lang="ro">
+    <head>
+        <meta name="keywords" content="cafenea,sushi,cafea,cafeaua">
+        <meta name="description" content="Vizitati-ne pentru cafea intensa și BAUTURI premium.">
+        <title>Cofetăria Dulcelind - eroare</title>
+        <%- include("../fragmente/head.ejs");  %> 
+        <link rel="stylesheet" type="text/css" href="/resurse/css/eroare.css">
+
+    </head>
+    <body>
+        
+    <%- include("../fragmente/nav.ejs");  %> 
+
+    <main>
+        <section id="err-coloane">
+			<div id="err-imag">
+				<img src="<%- locals.imagine %>" />
+			</div>
+			<div>
+				<h2><%- locals.titlu %></h2>
+				<p><%- locals.text %></p>
+            </div>
+		</section>
+    </main>
+    
+    <%- include("../fragmente/footer-eroare.ejs");  %> 
+
+
+    </body>
+</html>
