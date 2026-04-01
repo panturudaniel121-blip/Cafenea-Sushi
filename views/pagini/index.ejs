@@ -31,11 +31,8 @@
 
                         <div id="dv-prezentare">
                             <figure>
-                                <picture title="Cafeaua zilei">
-                                    <!-- il ia pe primul care se potriveste cu query-ul din media-->
-                                    <source srcset="/resurse/imagini/cafeau_zilei200.jpg" media="(max-width:700px)"/>
-                                    <source srcset="/resurse/imagini/cafeau_zilei400.jpg" media="(max-width:1200px)"/>
-                                    <img src="/resurse/imagini/cafeau_zilei600.jpg" alt="cafea"/>
+                                <picture title="Cafeaua zilei"> 
+                                    <img src="/resurse/imagini/cafeau_zilei600.jpg" alt="cafea" class="imagine_redimensionala">
                                 </picture>
                                 <figcaption>Cafeaua zilei</figcaption>
                             </figure>
@@ -43,9 +40,9 @@
                     </div>
 
                     <div>
-                        <h2>Vrei sa te informezi despre originea cafelei si a sushi-ului? </h2>
+                        <h2 style="margin-top: 0;">Vrei sa te informezi despre originea cafelei si a sushi-ului? </h2>
                         <p>Apasa pe ce esti interesat sa afli si vei fi redirectionat automat la wikipedia!</p>
-                        <img src="/resurse/imagini/cafea&sushi.png" alt="Masă cu sushi și cafea" usemap="#harta_produse">
+                        <img src="/resurse/imagini/cafea&sushi.png" alt="Masă cu sushi și cafea" usemap="#harta_produse" class="imagine_redimensionala">
 
                         <map name="harta_produse">
                             <area shape="poly" coords="82,319,64,143,128,146,143,297" title="cafea" href="https://ro.wikipedia.org/wiki/Cafea" target="_blank" alt="cafea">
@@ -64,12 +61,12 @@
                         <div id="centrare-video">
                             <div id="clip-video">
                                 <div id="stil-video">
-                                    <video width="320" height="240"  playsinline autoplay loop muted preload="metadata">
+                                    <video width="320" height="240" playsinline autoplay loop muted controls preload="metadata">
                                         <source src="/resurse/video/Making_of_onigiri.mp4" type="video/mp4">
                                         <source src="/resurse/video/Making_of_onigiri.mov" type="video/mov">
-                                        <track default src="data:text/vtt;charset=utf-8,WEBVTT%0A%0A00%3A00.000%20--%3E%2000%3A03.000%20line%3A50%25%20align%3Amiddle%0AMaking%20of%20onigiri%0A%0A00%3A03.000%20--%3E%2000%3A06.500%0ADeci%20se%20taie%20aia%20si%20apoi%20se%20apasa%20ala%20in%20forma%0A%0A00%3A06.500%20--%3E%2000%3A08.000%0ASe%20impatureste%20bine%20in%20aia%0A%0A00%3A09.000%20--%3E%2000%3A13.000%0ASe%20da%20cu%20chestii%20peste%20si%20aia%20e%20%0A%0A00%3A13.000%20--%3E%2000%3A14.500%0AA%2C%20se%20mai%20pune%20altceva%20peste.%20%0A%0A00%3A14.500%20--%3E%2000%3A16.500%0ACe%20unghii%20are%20emoloaica%20%F0%9F%98%AD%F0%9F%98%AD%F0%9F%98%AD" kind="captions" srclang="ro" label="Română">
-    
-                                        <track src="data:text/vtt;charset=utf-8,WEBVTT%0A%0A00%3A00.000%20--%3E%2000%3A03.000%20line%3A50%25%20align%3Amiddle%0AMaking%20of%20onigiri%0A%0A00%3A03.000%20--%3E%2000%3A06.500%0ASo%20they%20cut%20that%20thing%20and%20then%20press%20the%20other%20thing%20in%20the%20mold%0A%0A00%3A06.500%20--%3E%2000%3A08.000%0AYou%20wrap%20it%20up%20real%20good%20in%20that%20thing%0A%0A00%3A09.000%20--%3E%2000%3A13.000%0AYou%20sprinkle%20some%20stuff%20on%20top%20and%20that%27s%20it%0A%0A00%3A13.000%20--%3E%2000%3A14.500%0AOh%20wait%2C%20something%20else%20goes%20on%20top.%20%0A%0A00%3A14.500%20--%3E%2000%3A16.500%0ALook%20at%20the%20emo%20girl%27s%20nails%20%F0%9F%98%AD%F0%9F%98%AD%F0%9F%98%AD" kind="captions" srclang="en" label="English">
+                                        
+                                        <track default src="/resurse/video/vvt/ro.vtt" kind="captions" srclang="ro" label="Română">
+                                        <track src="/resurse/video/vvt/en.vtt" kind="captions" srclang="en" label="English">
                                     </video>
                                 </div>
                             </div>
@@ -189,7 +186,9 @@
                         E adevărat că doar studiile noastre făcute în spate la bistro, dar astea sunt detalii. </p>
                 </section>
 
-                <section id="utilizatori-online" class="PLACEHOLDER">IP: <%- locals.ip %></section>
+                <section id="utilizatori-online" class="PLACEHOLDER">IP: <%- locals.ip %>
+                    <button class="btn btn-primary">Buton boostrap</button>
+                </section>
                 <section id="utilizatori-statistici">PLACEHOLDER</section>
                 <section id="site-server">PLACEHOLDER</section>
 
@@ -382,7 +381,7 @@
 
                 <section id="galerie-statica">
                 <h2>Galerie</h2>
-                <div id="grid-galerie" class="grid-galerie">
+                <!-- <div id="grid-galerie" class="grid-galerie">
                     <figure>
                     <img src="/resurse/imagini/shushi1.png" alt="shushi1">
                     <figcaption>Rulou de creveți tempura</figcaption>
@@ -395,7 +394,19 @@
                     <img src="/resurse/imagini/shushi3.png" alt="shushi3">
                     <figcaption>Rulou katsu de pui picant</figcaption>
                     </figure>
+                </div> -->
+                <div id="grid-galerie" class="grid-galerie">
+                    <% for(let imag of locals.imagini){ %>
+                        <figure>
+                            <picture>
+                                <source srcset="<%- imag.fisier_mediu %>" media="max-width(1100px)">
+                                <img src="<%- imag.fisier %>" alt="shushi1">
+                            <figcaption>Rulou de creveți tempura</figcaption>
+                            </picture>
+                        </figure>
+                    <% }%>
                 </div>
+
             </section>
 
             <section id="linkuri">
@@ -428,12 +439,11 @@
                 <h2>Uita-ti aici un exemplu de mod de preparare</h2>
                 
                 <iframe 
-                    width="560" 
-                    height="315" 
                     src="https://www.youtube.com/embed/8aMuMYYKxDM?playlist=IKrOZQ0HBEM,VN34nnb1HjE,8aMuMYYKxDM&autoplay=1&controls=1&loop=1&mute=1" 
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    class="iframe-playlist"
                     allowfullscreen>
                 </iframe>
 

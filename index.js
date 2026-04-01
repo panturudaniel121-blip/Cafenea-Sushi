@@ -2,6 +2,7 @@ const express= require("express");
 const path= require("path");
 const fs=require("fs");
 const sass=require("sass");
+const sharp = require('sharp');
 
 const app= express();
 app.set("view engine", "ejs")
@@ -29,6 +30,7 @@ for(let folder of vect_folder){
 }
 
 app.use("/resurse",express.static(path.join(__dirname, "resurse")));
+app.use("/dist",express.static(path.join(__dirname, "node_modules/bootstrap/dist")));
 
 app.get("/favicon.ico", function(req,res){
     res.sendFile(path.join(__dirname,"resurse/imagini/favicon/favicon.ico"))
@@ -37,6 +39,7 @@ app.get("/favicon.ico", function(req,res){
 app.get(["/","/index","/home"], function(req,res){
     res.render("pagini/index",{
         ip:req.ip,
+        imagini:obGlobal.obImagini.imagini
     });
 });
 
@@ -46,6 +49,116 @@ app.get("/despre", function(req, res){
 
 
 
+//bonus 
+
+const caleEroriJson = path.join(__dirname, "resurse/json/erori.json");
+
+function verificaExistentaFisierErori(cale) {
+    if (!fs.existsSync(cale)) {
+        console.error("Eroare: Fișierul erori.json nu există.");
+        process.exit();
+    }
+}
+verificaExistentaFisierErori(caleEroriJson);
+
+const textJsonErori = fs.readFileSync(caleEroriJson).toString("utf-8");
+
+function verificaProprietatiDuplicateString(textJson) {
+    const regexObiecte = /\{[^{}]*\}/g;
+    const obiecte = textJson.match(regexObiecte);
+    
+    if (obiecte) {
+        for (let obiectStr of obiecte) {
+            let chei = [...obiectStr.matchAll(/"([^"]+)"\s*:/g)].map(match => match[1]);
+            let cheiUnice = new Set(chei);
+            
+            if (chei.length !== cheiUnice.size) {
+                console.error("Eroare: Există o proprietate specificată de mai multe ori într-un obiect din fișierul JSON.");
+            }
+        }
+    }
+}
+verificaProprietatiDuplicateString(textJsonErori);
+
+const obiectEroriParsed = JSON.parse(textJsonErori);
+
+function verificaProprietatiPrincipale(obiectJson) {
+    if (!obiectJson.info_erori || !obiectJson.cale_baza || !obiectJson.eroare_default) {
+        console.error("Eroare: Lipsesc una sau mai multe dintre proprietățile: info_erori, cale_baza, eroare_default.");
+    }
+}
+verificaProprietatiPrincipale(obiectEroriParsed);
+
+function verificaProprietatiEroareDefault(eroareDefault) {
+    if (eroareDefault) {
+        if (!eroareDefault.titlu || !eroareDefault.text || !eroareDefault.imagine) {
+            console.error("Eroare: Pentru eroarea default lipsește una dintre proprietățile: titlu, text sau imagine.");
+        }
+    }
+}
+verificaProprietatiEroareDefault(obiectEroriParsed.eroare_default);
+
+function verificaExistentaFolderCaleBaza(caleBaza) {
+    if (caleBaza) {
+        let caleAbsoluta = path.join(__dirname, caleBaza);
+        if (!fs.existsSync(caleAbsoluta)) {
+            console.error(`Eroare: Folderul specificat în "cale_baza" (${caleBaza}) nu există în sistemul de fișiere.`);
+        }
+    }
+}
+verificaExistentaFolderCaleBaza(obiectEroriParsed.cale_baza);
+
+function verificaExistentaImagini(caleBaza, eroareDefault, infoErori) {
+    if (caleBaza) {
+        let caleAbsolutaBaza = path.join(__dirname, caleBaza);
+        
+        if (eroareDefault && eroareDefault.imagine) {
+            let caleImgDefault = path.join(caleAbsolutaBaza, eroareDefault.imagine);
+            if (!fs.existsSync(caleImgDefault)) {
+                console.error(`Eroare: Fișierul imagine pentru eroarea default (${eroareDefault.imagine}) nu există.`);
+            }
+        }
+
+        if (infoErori) {
+            for (let eroare of infoErori) {
+                if (eroare.imagine) {
+                    let caleImg = path.join(caleAbsolutaBaza, eroare.imagine);
+                    if (!fs.existsSync(caleImg)) {
+                        console.error(`Eroare: Fișierul imagine (${eroare.imagine}) pentru eroarea cu identificatorul ${eroare.identificator} nu există.`);
+                    }
+                }
+            }
+        }
+    }
+}
+verificaExistentaImagini(obiectEroriParsed.cale_baza, obiectEroriParsed.eroare_default, obiectEroriParsed.info_erori);
+
+function verificaIdentificatoriDuplicati(infoErori) {
+    if (infoErori) {
+        let dictionarId = {};
+        
+        for (let eroare of infoErori) {
+            if (!dictionarId[eroare.identificator]) {
+                dictionarId[eroare.identificator] = [];
+            }
+            dictionarId[eroare.identificator].push(eroare);
+        }
+
+        for (let id in dictionarId) {
+            if (dictionarId[id].length > 1) {
+                console.error(`Eroare: Există mai multe erori cu identificatorul ${id}. Detalii erori:`);
+                for (let eroare of dictionarId[id]) {
+                    let copieEroare = { ...eroare };
+                    delete copieEroare.identificator;
+                    console.error(JSON.stringify(copieEroare));
+                }
+            }
+        }
+    }
+}
+verificaIdentificatoriDuplicati(obiectEroriParsed.info_erori);
+
+//bonus end
 
 function initErori(){
     let continut = fs.readFileSync(path.join(__dirname,"resurse/json/erori.json")).toString("utf-8");
@@ -75,6 +188,31 @@ app.get("/eroare", function(req,res)
 {
     afisareEroare(res,404,"Eroare 404");
 });
+
+function initImagini(){
+    var continut= fs.readFileSync(path.join(__dirname,"resurse/json/galerie.json")).toString("utf-8");
+
+    obGlobal.obImagini=JSON.parse(continut);
+    let vImagini=obGlobal.obImagini.imagini;
+    let caleGalerie=obGlobal.obImagini.cale_galerie
+
+    let caleAbs=path.join(__dirname,caleGalerie);
+    let caleAbsMediu=path.join(caleAbs, "mediu");
+    if (!fs.existsSync(caleAbsMediu))
+        fs.mkdirSync(caleAbsMediu);
+    
+    for (let imag of vImagini){
+        [numeFis, ext]=imag.fisier.split("."); //"ceva.png" -> ["ceva", "png"]
+        let caleFisAbs=path.join(caleAbs,imag.fisier);
+        let caleFisMediuAbs=path.join(caleAbsMediu, numeFis+".webp");
+        sharp(caleFisAbs).resize(300).toFile(caleFisMediuAbs);
+        imag.fisier_mediu=path.join("/", caleGalerie, "mediu", numeFis+".webp" )
+        imag.fisier=path.join("/", caleGalerie, imag.fisier )
+        
+    }
+    // console.log(obGlobal.obImagini)
+}
+initImagini();
 
 function compileazaScss(caleScss, caleCss){
     if(!caleCss){
@@ -143,7 +281,7 @@ app.get("/*pagina", function(req,res){
             }   
                 afisareEroare(res)     
                 return;   
-             
+            
         }
         res.send(rezRandare);
 

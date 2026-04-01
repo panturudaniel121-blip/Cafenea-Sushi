@@ -55,11 +55,11 @@ a{
     background-image: radial-gradient(circle, $culoare2, $culoare3, transparent 80%, transparent 100%);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 0%;
+    background-size: 0% 0%;
     transition: background-size 0.2s linear;
         
         &:visited{
-            color:$culoare4 !important
+            color:$culoare4 !important;
         }
 
         &[href^="http"]::before {
@@ -70,7 +70,7 @@ a{
 
         &:hover{
 
-            background-size: 100%;
+            background-size: 100% 60%;
 
             &[href^="http"]::before {
                 color: #27ae60;
@@ -238,7 +238,8 @@ footer {
         border: 1px solid $culoare_contur;
         padding: 10px;
         text-align: center;
-        transition: all 0.75s linear;
+        transition: all 0.3s linear;
+        font-size: 0.9em;
 
         &:nth-child(odd) { color: #5A3825; }
         &:nth-child(even) { color: #C33C23; }
@@ -411,19 +412,25 @@ figure.fg-img > img {
     }
 
     #rest-continut {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr ;
         grid-template-areas:
-            "promotii promotii"
-            "figuri produse"
-            "intrebari intrebari"
-            "galerie galerie"
-            "retete linkuri"
-            "meniu meniu";
+                   "promotii promotii promotii"
+        "figuri figuri produse"
+        "figuri figuri produse"
+        "figuri figuri   produse"
+        "intrebari intrebari intrebari"
+        "galerie galerie galerie"
+        "retete retete linkuri"
+        "meniu meniu meniu";
     }
 
     #tab-orar {
         border-spacing: 7px; 
         gap: 10px;
+        th, td {
+        padding: 0.3em;   
+        font-size: 0.9em;
+        }
     } 
 }
 
@@ -445,7 +452,28 @@ figure.fg-img > img {
     #tab-orar {
         border-spacing: 0; 
         gap: 5px;
+                th, td {
+        padding: 0.25em;   
+        font-size: 0.8em;
+        }
     } 
+
+    footer{
+        .iframe-harta{
+            margin-left: 5%;
+            width: 90% !important;
+        }
+
+        .iframe-playlist{
+            width: 100% !important;
+            aspect-ratio: 16/9;
+        }
+
+        .iframe_cu_butoane{
+            width: 100% !important;
+            aspect-ratio: 16/9;
+        }
+    }
 
     .flex-row, .grid-galerie { display: block; }
 }

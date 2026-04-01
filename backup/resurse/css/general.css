@@ -42,7 +42,7 @@ a:not(.taburi-iframe a, nav *) {
   background-image: radial-gradient(circle, #FFEC38, #FFD539, transparent 80%, transparent 100%);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 0%;
+  background-size: 0% 0%;
   transition: background-size 0.2s linear;
 }
 a:not(.taburi-iframe a, nav *):visited {
@@ -54,7 +54,7 @@ a:not(.taburi-iframe a, nav *)[href^=http]::before {
   display: inline-block;
 }
 a:not(.taburi-iframe a, nav *):hover {
-  background-size: 100%;
+  background-size: 100% 60%;
 }
 a:not(.taburi-iframe a, nav *):hover[href^=http]::before {
   color: #27ae60;
@@ -228,7 +228,8 @@ footer a {
   border: 1px solid rgb(0, 0, 0);
   padding: 10px;
   text-align: center;
-  transition: all 0.75s linear;
+  transition: all 0.3s linear;
+  font-size: 0.9em;
 }
 #tab-orar th:nth-child(odd), #tab-orar td:nth-child(odd) {
   color: #5A3825;
@@ -416,12 +417,16 @@ figure.fg-img > img {
     grid-template-areas: "welcome welcome welcome" "orar orar evenimente" "orar orar anunturi" "utilizatori-online utilizatori-statistici site-server" "rest-continut rest-continut rest-continut";
   }
   #rest-continut {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "promotii promotii" "figuri produse" "intrebari intrebari" "galerie galerie" "retete linkuri" "meniu meniu";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "promotii promotii promotii" "figuri figuri produse" "figuri figuri produse" "figuri figuri   produse" "intrebari intrebari intrebari" "galerie galerie galerie" "retete retete linkuri" "meniu meniu meniu";
   }
   #tab-orar {
     border-spacing: 7px;
     gap: 10px;
+  }
+  #tab-orar th, #tab-orar td {
+    padding: 0.3em;
+    font-size: 0.9em;
   }
 }
 @media screen and (max-width: 800px) {
@@ -442,6 +447,22 @@ figure.fg-img > img {
   #tab-orar {
     border-spacing: 0;
     gap: 5px;
+  }
+  #tab-orar th, #tab-orar td {
+    padding: 0.25em;
+    font-size: 0.8em;
+  }
+  footer .iframe-harta {
+    margin-left: 5%;
+    width: 90% !important;
+  }
+  footer .iframe-playlist {
+    width: 100% !important;
+    aspect-ratio: 16/9;
+  }
+  footer .iframe_cu_butoane {
+    width: 100% !important;
+    aspect-ratio: 16/9;
   }
   .flex-row, .grid-galerie {
     display: block;
