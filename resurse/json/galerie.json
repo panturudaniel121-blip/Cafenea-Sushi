@@ -1,41 +1,87 @@
 {
-	"cale_galerie":"resurse/imagini/galerie",
-	"imagini": [
-		{
-			"fisier":"briose-frisca.png",
-			"descriere":"Brioșe",
-			"luni":["martie","februarie","noiembrie","aprilie", "decembrie","octombrie"]
-		},
-		{
-			"fisier":"clatite.png",
-			"descriere":"Clătite cu dulceață",
-			"luni":["ianuarie","februarie","iunie","octombrie"]
-			
-		},
-		{
-			"fisier":"gogosi.png",
-			"descriere":"Gogoși glazurate",
-			"luni":["ianuarie","noiembrie","iunie","martie","aprilie"]
-		},
-		{
-			"fisier":"tort-scortisoara.png",
-			"descriere":"Tort cu scorțisoară",
-			
-			"luni":["noiembrie","aprilie", "decembrie"]
-		},
-		{
-			"fisier":"prajitura-ciocolata.png",
-			"descriere":"Prăjitură cu ciocolată",
-			
-			"luni":["noiembrie","aprilie", "decembrie","octombrie"]
-		},
-		{
-			"fisier":"tarta-afine.png",
-			"descriere":"Tartă cu afine"
-		},
-		{
-			"fisier":"tort-trandafiri.png",
-			"descriere":"Tort special"
-		}
-	]
+    "cale_galerie":"resurse/imagini/galerie",
+    "imagini": [
+            {
+                "fisier_imagine":"coffe-galerie1.jpg",
+                "nume_poza":"Frape cu ciocolata",
+                "continut_alternativ":"Frape cu ciocolata",
+                "intervale_zile":[["luni","miercuri"], ["vineri","vineri"]]
+            },
+            {
+                "fisier_imagine":"coffe-galerie2.jpg",
+                "nume_poza":"Pisici si ceai",
+                "continut_alternativ":"Pisici si ceai",
+                "intervale_zile":[["joi","sambata"]]
+            },
+            {
+                "fisier_imagine":"coffe-galerie3.jpg",
+                "nume_poza":"Ciocolata calda",
+                "continut_alternativ":"Pisici si ceai",
+                "intervale_zile":[["marti","vineri"]]
+            },
+            {
+                "fisier_imagine":"sushi_galerie1.png",
+                "nume_poza":"Sushi cu somon",
+                "continut_alternativ":"Sushi cu somon",
+                "intervale_zile":[["luni","luni"], ["miercuri","vineri"]]
+            },
+            {
+                "fisier_imagine":"sushi_galerie2.jpg",
+                "nume_poza":"Sushi vegan",
+                "continut_alternativ":"Sushi vegan",
+                "intervale_zile":[["sambata","luni"]]
+            },
+            {
+                "fisier_imagine":"sushi_galerie3.png",
+                "nume_poza":"Sushi de paste",
+                "intervale_zile":[["joi","joi"], ["duminica","duminica"]]
+            },
+            {
+                "fisier_imagine":"sushi_galerie4.png",
+                "nume_poza":"Sushi si pisici",
+                "continut_alternativ":"Sushi si pisici",
+                "intervale_zile":[["miercuri","duminica"], ["luni","luni"]]
+            },
+            {
+                "fisier_imagine":"coffe-galerie1-modified.jpg",
+                "nume_poza":"Frape cu ciocolata - alb negru",
+                "continut_alternativ":"Frape cu ciocolata",
+                "intervale_zile":[["marti","joi"]]
+            },
+            {
+                "fisier_imagine":"coffe-galerie2-modified.jpg",
+                "nume_poza":"Pisici si ceai - alb negru",
+                "continut_alternativ":"Pisici si ceai",
+                "intervale_zile":[["vineri","duminica"]]
+            },
+            {
+                "fisier_imagine":"coffe-galerie3-modified.jpg",
+                "nume_poza":"Ciocolata calda - alb negru",
+                "continut_alternativ":"Pisici si ceai",
+                "intervale_zile":[["luni","miercuri"], ["sambata","sambata"]]
+            },
+            {
+                "fisier_imagine":"sushi_galerie1-modified.png",
+                "nume_poza":"Sushi cu somon - alb negru",
+                "continut_alternativ":"Sushi cu somon",
+                "intervale_zile":[["joi","duminica"]]
+            },
+            {
+                "fisier_imagine":"sushi_galerie2-modified.jpg",
+                "nume_poza":"Sushi vegan - alb negru",
+                "continut_alternativ":"Sushi vegan",
+                "intervale_zile":[["marti","vineri"]]
+            },
+            {
+                "fisier_imagine":"sushi_galerie3-modified.png",
+                "nume_poza":"Sushi de paste - alb negru",
+                "intervale_zile":[["luni","marti"], ["joi","vineri"]]
+            },
+            {
+                "fisier_imagine":"sushi_galerie4-modified.png",
+                "nume_poza":"Sushi si pisici - alb negru",
+                "continut_alternativ":"Sushi si pisici",
+                "intervale_zile":[["sambata","marti"]]
+            }
+    ]
 }

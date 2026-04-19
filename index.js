@@ -16,11 +16,7 @@ obGlobal={
     folderCss: path.join(__dirname,"/resurse/css"),
     folderBackup: path.join(__dirname,"backup"),
 }
-
-console.log("Folder index.js", __dirname);
-console.log("Folder curent (de lucru)", process.cwd());
-console.log("Cale fisier", __filename);
-
+    
 let vect_folder=["temp","logs","backup","fisiere_uploadate"];
 for(let folder of vect_folder){
     let caleFolder=path.join(__dirname, folder);
@@ -43,12 +39,45 @@ app.get(["/","/index","/home"], function(req,res){
     });
 });
 
+app.get("/galerie", function(req,res){
+    res.render("pagini/galerie",{
+        imagini:obGlobal.obImagini.imagini
+    });
+});
+
 app.get("/despre", function(req, res){
     res.render("pagini/despre");
 });
 
+function verificaGalerie() {
+    const caleGalerieJson = path.join(__dirname, "resurse/json/galerie.json");
+    
+    if (!fs.existsSync(caleGalerieJson)) {
+        console.error("Eroare critica: Fisierul galerie.json nu a fost gasit la calea:", caleGalerieJson);
+        return;
+    }
 
+    const dateGalerie = JSON.parse(fs.readFileSync(caleGalerieJson, "utf-8"));
+    const caleGalerie = dateGalerie.cale_galerie;
+    const vImagini = dateGalerie.imagini;
 
+    const caleAbsolutaGalerie = path.join(__dirname, caleGalerie);
+    if (!fs.existsSync(caleAbsolutaGalerie)) {
+        console.error(`Eroare: Folderul specificat in "cale_galerie" (${caleGalerie}) nu exista pe disc. Calea cautata: ${caleAbsolutaGalerie}`);
+        process.exit(1);
+    } else {
+        if (vImagini && Array.isArray(vImagini)) {
+            vImagini.forEach((imag) => {
+                const caleFisAbs = path.join(caleAbsolutaGalerie, imag.fisier_imagine);
+                if (!fs.existsSync(caleFisAbs)) {
+                    console.error(`Eroare: Imaginea "${imag.fisier_imagine}" specificata in JSON nu a fost gasita in folderul de resurse. Calea lipsa: ${caleFisAbs}`);
+                    process.exit(1);
+                }
+            });
+        }
+    }
+}
+verificaGalerie();
 //bonus 
 
 const caleEroriJson = path.join(__dirname, "resurse/json/erori.json");
@@ -202,64 +231,67 @@ function initImagini(){
         fs.mkdirSync(caleAbsMediu);
     
     for (let imag of vImagini){
-        [numeFis, ext]=imag.fisier.split("."); //"ceva.png" -> ["ceva", "png"]
-        let caleFisAbs=path.join(caleAbs,imag.fisier);
+        [numeFis, ext]=imag.fisier_imagine.split("."); //"ceva.png" -> ["ceva", "png"]
+        let caleFisAbs=path.join(caleAbs,imag.fisier_imagine);
         let caleFisMediuAbs=path.join(caleAbsMediu, numeFis+".webp");
         sharp(caleFisAbs).resize(300).toFile(caleFisMediuAbs);
         imag.fisier_mediu=path.join("/", caleGalerie, "mediu", numeFis+".webp" )
-        imag.fisier=path.join("/", caleGalerie, imag.fisier )
+        imag.fisier_imagine=path.join("/", caleGalerie, imag.fisier_imagine )
         
     }
-    // console.log(obGlobal.obImagini)
+    console.log(obGlobal.obImagini)
 }
 initImagini();
 
-function compileazaScss(caleScss, caleCss){
-    if(!caleCss){
+function creeazaBackup(caleCss, folderDestinatie, timestamp) {
+    if (!fs.existsSync(caleCss)) return;
 
-        let numeFisExt=path.basename(caleScss); // "folder1/folder2/a.scss" -> "a.scss"
-        let numeFis=numeFisExt.split(".")[0]   /// "a.scss"  -> ["a","scss"]
-        caleCss=numeFis+".css"; // output: a.css
+    if (!fs.existsSync(folderDestinatie)) {
+        fs.mkdirSync(folderDestinatie, { recursive: true });
     }
     
-    if (!path.isAbsolute(caleScss))
-        caleScss=path.join(obGlobal.folderScss,caleScss )
-    if (!path.isAbsolute(caleCss))
-        caleCss=path.join(obGlobal.folderCss,caleCss )
-    
-    let caleBackup=path.join(obGlobal.folderBackup, "resurse/css");
-    if (!fs.existsSync(caleBackup)) {
-        fs.mkdirSync(caleBackup,{recursive:true})
-    }
-    
-    // la acest punct avem cai absolute in caleScss si  caleCss
+    const numeFisCss = path.basename(caleCss);
+    const extensieCss = path.extname(numeFisCss);
+    const numeBazaCss = path.basename(numeFisCss, extensieCss);
+    const numeBackupCuTimestamp = `${numeBazaCss}_${timestamp}${extensieCss}`;
 
-    let numeFisCss=path.basename(caleCss);
-    if (fs.existsSync(caleCss)){
-        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, "resurse/css",numeFisCss ))// +(new Date()).getTime()
-    }
-    rez=sass.compile(caleScss, {"sourceMap":true});
-    fs.writeFileSync(caleCss,rez.css)
-    
+    fs.copyFileSync(caleCss, path.join(folderDestinatie, numeBackupCuTimestamp));
 }
 
+function compileazaScss(caleScss, caleCss, folderDestinatieBackup, timestamp) {
+    if (!caleCss) {
+        const numeFis = path.basename(caleScss, path.extname(caleScss));
+        caleCss = path.join(obGlobal.folderCss, numeFis + ".css");
+    }
 
-vFisiere=fs.readdirSync(obGlobal.folderScss);
-for( let numeFis of vFisiere ){
-    if (path.extname(numeFis)==".scss"){
-        compileazaScss(numeFis);
+    if (!path.isAbsolute(caleScss)) caleScss = path.join(obGlobal.folderScss, caleScss);
+
+    creeazaBackup(caleCss, folderDestinatieBackup, timestamp);
+
+    const rez = sass.compile(caleScss, { "sourceMap": true });
+    fs.writeFileSync(caleCss, rez.css);
+}
+
+const timestampPornire = new Date().getTime();
+const folderBackupPornire = path.join(obGlobal.folderBackup, "resurse/css", timestampPornire.toString());
+
+vFisiere = fs.readdirSync(obGlobal.folderScss);
+for (let numeFis of vFisiere) {
+    if (path.extname(numeFis) == ".scss") {
+        compileazaScss(numeFis, null, folderBackupPornire, timestampPornire);
     }
 }
 
-
-fs.watch(obGlobal.folderScss, function(eveniment, numeFis){
-    if (eveniment=="change" || eveniment=="rename"){
-        let caleCompleta=path.join(obGlobal.folderScss, numeFis);
-        if (fs.existsSync(caleCompleta)){
-            compileazaScss(caleCompleta);
+fs.watch(obGlobal.folderScss, function(eveniment, numeFis) {
+    if ((eveniment == "change" || eveniment == "rename") && path.extname(numeFis) == ".scss") {
+        let caleCompleta = path.join(obGlobal.folderScss, numeFis);
+        if (fs.existsSync(caleCompleta)) {
+            const tsModificare = new Date().getTime();
+            const folderBackupModificare = path.join(obGlobal.folderBackup, "resurse/css", tsModificare.toString());
+            compileazaScss(caleCompleta, null, folderBackupModificare, tsModificare);
         }
     }
-})
+});
 
 app.get("/*pagina", function(req,res){
     console.log("Cale pagina", req.url);

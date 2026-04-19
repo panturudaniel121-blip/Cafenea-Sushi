@@ -1,6 +1,29 @@
-@use '../../node_modules/bootstrap/scss/bootstrap.scss' with 
-(
-    $primary: rgb(46, 97, 238),
-    $secondary:purple,
-    $h1-font-size: 10px,
-)
+@use '../../node_modules/bootstrap/scss/bootstrap.scss' with (
+  $primary: #FFBC38,
+  $secondary: #FFE68D,
+  $info: #FFEC38,
+  $warning: #FFD539,
+  $danger: #FFA038,
+  
+  $body-color: #333333,
+  
+$grid-breakpoints: (
+    xs: 0,
+    md: 800px,
+    lg: 1200px,
+  ),
+  
+  $border-radius: 15px,
+  $border-radius-sm: 8px,
+  $border-radius-lg: 25px,
+  
+  $h1-font-size: 3.2rem,
+  $h2-font-size: 2.5rem,
+  $h3-font-size: 1.9rem,
+  
+  $font-family-base: ('Helvetica Neue', Arial, sans-serif),
+  
+  $btn-padding-y: 0.8rem,
+  $btn-padding-x: 2rem,
+  $btn-font-weight: 700
+);

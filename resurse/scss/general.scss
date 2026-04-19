@@ -16,6 +16,7 @@ body {
     margin: 0;
     font-size: $dimensiune_text;
     transition: all 0.3s linear;
+    min-width:330px
 }
 
 section {
@@ -95,6 +96,7 @@ figure {
 }
 
 footer {
+    padding-top: 100px;
     border: black solid 4px;
     border-top-left-radius: 10%;
     border-top-right-radius: 10%;   
@@ -110,34 +112,80 @@ footer {
     a{
         text-decoration: underline;
     }
+
+    .iframe-harta{
+        margin-top: 5%;
+    }
+
+}
+
+hr {
+    background-color: $culoare4;
+    border: none;
+    height: 3px;
+    opacity: 1;
+    width: 80%;
+    margin: 30px auto; 
+    overflow: visible;
+    
+    position: relative; 
+    &::before {
+        content: "\2615";
+        position: absolute;
+        left: -15px; 
+        top: 50%;
+        transform: translate(-50%, -50%); 
+    }
+    &::after {
+        content: "\2615";
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translate(50%, -50%); 
+    }
+}
+
+.reflexie{
+    position:absolute;
+	top:130%;
+	transform-origin:0 0;
+	transform: rotateX(180deg) skew(-45deg) scaleY(0.5) translate(10px,-25px); 
+	opacity:0.55;
+    transition: all 0.55s linear;
+
+    
+}
+
+.titlu-site{
+    position:relative;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -20%);
+    width: max-content; 
+    max-width: 90vw;
+    text-align: center;
+
+    &:hover .reflexie {
+        transform: rotateX(180deg) skew(-45deg) scaleY(0.6) translate(30px,-45px); 
+    }
 }
 
 .flex-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    div{
+        flex: 1;
+    }
 }
+
+
 
 .subtitlu {
     margin: -20px 0px 0px 0px;
     padding: 0px;
     color: gray;
-}
-
-.grid-galerie {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-
-    figure {
-        margin-left: 3%;
-        margin-right: 3%;
-        width: 27%;
-
-        img {
-            width: 100%;
-        }
-    }
 }
 
 .container-iframe {
@@ -160,6 +208,7 @@ footer {
 }
 
 .container-contacte {
+    padding-top: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -308,6 +357,7 @@ footer {
         "figuri produse produse"
         "intrebari intrebari intrebari"
         "galerie galerie galerie"
+        "galerie-a galerie-a galerie-a"
         "retete retete linkuri"
         "meniu meniu meniu";
 
@@ -327,6 +377,7 @@ footer {
 #anunturi { grid-area: anunturi; }
 #linkuri { grid-area: linkuri; }
 #galerie-statica { grid-area: galerie; }
+#galerie-animata{grid-area: galerie-a;}
 #retete { grid-area: retete; }
 #meniu-pdf { grid-area: meniu; }
 #utilizatori-online { grid-area: utilizatori-online; }
@@ -420,6 +471,7 @@ figure.fg-img > img {
         "figuri figuri   produse"
         "intrebari intrebari intrebari"
         "galerie galerie galerie"
+        "galerie-a galerie-a galerie-a"
         "retete retete linkuri"
         "meniu meniu meniu";
     }
@@ -475,5 +527,5 @@ figure.fg-img > img {
         }
     }
 
-    .flex-row, .grid-galerie { display: block; }
+    .flex-row { display: block; }
 }

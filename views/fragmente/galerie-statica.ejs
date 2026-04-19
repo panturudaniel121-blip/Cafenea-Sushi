@@ -1,0 +1,60 @@
+<section id="galerie-statica">
+    <h2 class="text-primary">Galerie Statică</h2>
+
+    <div id="grid-galerie" class="grid-galerie">
+        <% 
+            //vectLuni=["ianuarie", "februarie","martie", "aprilie", "mai","iunie","iulie", "august","septembrie","octombrie","noiembrie","decembrie"]
+            vectorZile=["duminica","luni","marti","miercuri","joi","vineri","sambata"]
+            for(let imag of locals.imagini){ 
+                ziCurenta = vectorZile[(new Date()).getDay()]
+
+                let afiseaza = false; 
+            if (imag.intervale_zile) {
+                for (let inter of imag.intervale_zile) {
+                    let start = vectorZile.indexOf(inter[0]);
+                    let stop = vectorZile.indexOf(inter[1]);
+                    let azi = vectorZile.indexOf(ziCurenta);
+                    
+                    if (start <= stop && azi >= start && azi <= stop) afiseaza = true;
+
+                    if (start > stop && (azi >= start || azi <= stop)) afiseaza = true;
+                }
+            }
+
+                if (afiseaza) {
+                %>
+                    <figure>
+                        <picture>
+                            <source srcset="<%- imag.fisier_mediu %>" media="(max-width: 1100px)" alt="<%
+                            if(!imag.continut_alternativ) {imag.fisier_mediu}
+                            else {imag.fisier_mediu}
+                            %>">
+                            
+                            <img src="<%- imag.fisier_imagine %>" alt="shushi1">
+                        <figcaption><%- imag.nume_poza %></figcaption>
+                        </picture>
+                    </figure>
+                <% } %>
+                    
+        <% }%>
+    </div>
+
+</section>
+
+<section id="galerie-animata">
+    <h2 class="text-primary">Galerie Animată</h2>
+
+    <%
+        let imaginiFiltrate = locals.imagini.filter((_, i) => i % 2 === 1)
+        let nr = Math.floor(Math.random() * 9) + 6
+        let selectate = imaginiFiltrate.slice(0, nr)
+    %>
+
+    <div class="galerie-animata" style="--nr:<%= selectate.length %>">
+        <% for(let i = 0; i < selectate.length; i++){ %>
+            <figure style="--i:<%= i %>">
+                <img src="<%- selectate[i].fisier_imagine %>" alt="<%- selectate[i].nume_poza %>">
+            </figure>
+        <% } %>
+    </div>
+</section>
