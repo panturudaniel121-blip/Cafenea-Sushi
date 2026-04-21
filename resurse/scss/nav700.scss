@@ -40,10 +40,10 @@ ul.meniu{
   li{
     div{
       p{
-        @extend %line-block
+        @extend %line-block;
       }
       i{
-        @extend %line-block
+        @extend %line-block;
       }
     }
   }

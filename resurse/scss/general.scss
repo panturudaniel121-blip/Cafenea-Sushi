@@ -529,3 +529,14 @@ figure.fg-img > img {
 
     .flex-row { display: block; }
 }
+
+@media print{
+    .banner{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		background-color: transparent;
+		border: 50% double black;
+		
+	}
+}

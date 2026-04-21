@@ -75,6 +75,10 @@ body {
     width: 45%;
     transform: translate(65%,0);
     aspect-ratio: 4/3;
+
+    border: 20px solid transparent;
+    border-image: url("/imagini/border.png") 30 round;
+
     figure {
       position: absolute;
       inset: 0;

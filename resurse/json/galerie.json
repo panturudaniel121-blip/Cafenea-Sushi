@@ -76,12 +76,6 @@
                 "fisier_imagine":"sushi_galerie3-modified.png",
                 "nume_poza":"Sushi de paste - alb negru",
                 "intervale_zile":[["luni","marti"], ["joi","vineri"]]
-            },
-            {
-                "fisier_imagine":"sushi_galerie4-modified.png",
-                "nume_poza":"Sushi si pisici - alb negru",
-                "continut_alternativ":"Sushi si pisici",
-                "intervale_zile":[["sambata","marti"]]
             }
     ]
 }

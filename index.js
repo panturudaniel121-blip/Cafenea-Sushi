@@ -7,7 +7,7 @@ const sharp = require('sharp');
 const app= express();
 app.set("view engine", "ejs")
 
-
+const pg = require("pg");
 
 obGlobal={
     obErori:null,
@@ -16,7 +16,29 @@ obGlobal={
     folderCss: path.join(__dirname,"/resurse/css"),
     folderBackup: path.join(__dirname,"backup"),
 }
-    
+
+console.log("Folder index.js", __dirname);
+console.log("Folder curent (de lucru)", process.cwd());
+console.log("Cale fisier", __filename);
+
+client=new pg.Client({
+    database:"cti_2026",
+    user:"daniel",
+    password:"daniel",
+    host:"localhost",
+    port:5432
+})
+
+client.connect()
+
+// client.query("select * from prajituri where id>3",function(err,rez){
+//     if(err){
+//         console.log(err)
+//     }
+//     else
+//         console.log(rez)
+// })
+
 let vect_folder=["temp","logs","backup","fisiere_uploadate"];
 for(let folder of vect_folder){
     let caleFolder=path.join(__dirname, folder);
@@ -49,6 +71,43 @@ app.get("/despre", function(req, res){
     res.render("pagini/despre");
 });
 
+app.get("/produse", function(req,res){
+    clauzaWhere=""
+    if(req.query.tip){
+        clauzaWhere=`where tip_produs= '${req.query.tip}'`
+    }
+    client.query(`select * from prajituri ${clauzaWhere}`,function(err,rez){
+    if(err){
+        console.log(err)
+        afisareEroare(res,2)
+    }
+    else
+        res.render("pagini/produse",{
+            produse: rez.rows,
+            optiuni:[]
+    })
+})
+})
+
+app.get("/produs/:id", function(req,res){
+    client.query(`select * from prajituri where id=${req.params.id}`,function(err,rez){
+    if(err){
+        console.log(err)
+        afisareEroare(res,2)
+    }
+    else
+        if(rez.rowCount==0){
+            afisareEroare(res,404,"Produs inexistent")
+        }
+        else{
+
+            res.render("pagini/produs",{
+                prod: rez.rows[0],
+            })
+        }
+})
+})
+
 function verificaGalerie() {
     const caleGalerieJson = path.join(__dirname, "resurse/json/galerie.json");
     
@@ -78,7 +137,7 @@ function verificaGalerie() {
     }
 }
 verificaGalerie();
-//bonus 
+//bonus etapa 4
 
 const caleEroriJson = path.join(__dirname, "resurse/json/erori.json");
 
@@ -91,23 +150,6 @@ function verificaExistentaFisierErori(cale) {
 verificaExistentaFisierErori(caleEroriJson);
 
 const textJsonErori = fs.readFileSync(caleEroriJson).toString("utf-8");
-
-function verificaProprietatiDuplicateString(textJson) {
-    const regexObiecte = /\{[^{}]*\}/g;
-    const obiecte = textJson.match(regexObiecte);
-    
-    if (obiecte) {
-        for (let obiectStr of obiecte) {
-            let chei = [...obiectStr.matchAll(/"([^"]+)"\s*:/g)].map(match => match[1]);
-            let cheiUnice = new Set(chei);
-            
-            if (chei.length !== cheiUnice.size) {
-                console.error("Eroare: Există o proprietate specificată de mai multe ori într-un obiect din fișierul JSON.");
-            }
-        }
-    }
-}
-verificaProprietatiDuplicateString(textJsonErori);
 
 const obiectEroriParsed = JSON.parse(textJsonErori);
 
@@ -162,6 +204,23 @@ function verificaExistentaImagini(caleBaza, eroareDefault, infoErori) {
 }
 verificaExistentaImagini(obiectEroriParsed.cale_baza, obiectEroriParsed.eroare_default, obiectEroriParsed.info_erori);
 
+function verificaProprietatiDuplicateString(textJson) {
+    const regexObiecte = /\{[^{}]*\}/g;
+    const obiecte = textJson.match(regexObiecte);
+    
+    if (obiecte) {
+        for (let obiectStr of obiecte) {
+            let chei = [...obiectStr.matchAll(/"([^"]+)"\s*:/g)].map(match => match[1]);
+            let cheiUnice = new Set(chei);
+            
+            if (chei.length !== cheiUnice.size) {
+                console.error("Eroare: Există o proprietate specificată de mai multe ori într-un obiect din fișierul JSON.");
+            }
+        }
+    }
+}
+verificaProprietatiDuplicateString(textJsonErori);
+
 function verificaIdentificatoriDuplicati(infoErori) {
     if (infoErori) {
         let dictionarId = {};
@@ -175,12 +234,7 @@ function verificaIdentificatoriDuplicati(infoErori) {
 
         for (let id in dictionarId) {
             if (dictionarId[id].length > 1) {
-                console.error(`Eroare: Există mai multe erori cu identificatorul ${id}. Detalii erori:`);
-                for (let eroare of dictionarId[id]) {
-                    let copieEroare = { ...eroare };
-                    delete copieEroare.identificator;
-                    console.error(JSON.stringify(copieEroare));
-                }
+                console.error(`Eroare: Există mai multe erori cu identificatorul ${id}.`);
             }
         }
     }
@@ -250,7 +304,7 @@ function creeazaBackup(caleCss, folderDestinatie, timestamp) {
         fs.mkdirSync(folderDestinatie, { recursive: true });
     }
     
-    const numeFisCss = path.basename(caleCss);
+    const numeFisCss  = path.basename(caleCss);
     const extensieCss = path.extname(numeFisCss);
     const numeBazaCss = path.basename(numeFisCss, extensieCss);
     const numeBackupCuTimestamp = `${numeBazaCss}_${timestamp}${extensieCss}`;

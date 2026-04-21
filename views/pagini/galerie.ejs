@@ -7,14 +7,26 @@
         <%- include("../fragmente/head.ejs");  %> 
 
     </head>
-    <body>
+    <body >
+
+    <header>
+            <h1 class="pacifico titlu-site">Galerie<i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i>
+                <div>
+                    <h1 class="pacifico reflexie">Galerie<i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i>
+                </div>
+            </h1>
+        <%- include("../fragmente/nav.ejs");  %> 
+    </header>
+    <Br>
+
+    <main>
         
-    <%- include("../fragmente/nav.ejs");  %> 
+        <%- include("../fragmente/galerie-statica.ejs"); %>
+        
+    </main>
 
-    <%- include("../fragmente/galerie-statica.ejs"); %>
-    
     <%- include("../fragmente/footer.ejs");  %> 
-
+        
 
     </body>
 </html>
