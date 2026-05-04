@@ -31,14 +31,6 @@ client=new pg.Client({
 
 client.connect()
 
-// client.query("select * from prajituri where id>3",function(err,rez){
-//     if(err){
-//         console.log(err)
-//     }
-//     else
-//         console.log(rez)
-// })
-
 let vect_folder=["temp","logs","backup","fisiere_uploadate"];
 for(let folder of vect_folder){
     let caleFolder=path.join(__dirname, folder);
@@ -73,24 +65,38 @@ app.get("/despre", function(req, res){
 
 app.get("/produse", function(req,res){
     clauzaWhere=""
+    console.log("req.query.tip")
     if(req.query.tip){
-        clauzaWhere=`where tip_produs= '${req.query.tip}'`
+        clauzaWhere=`where tip_produs = '${req.query.tip}'`
     }
-    client.query(`select * from prajituri ${clauzaWhere}`,function(err,rez){
-    if(err){
-        console.log(err)
-        afisareEroare(res,2)
-    }
-    else
-        res.render("pagini/produse",{
-            produse: rez.rows,
-            optiuni:[]
-    })
+    client.query(`select * from produse ${clauzaWhere}`,function(err,rez){
+        if(err){
+            console.log(err)
+            afisareEroare(res,2)
+        }
+        else{
+            client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezOptiuni){
+    
+            if (err){
+
+                console.log("Eroare", err)
+                afisareEroare(res,2)
+
+            }
+
+            else{
+                res.render("pagini/produse",{
+                    produse: rez.rows,
+                    optiuni:rezOptiuni.rows
+            })
+                
+            }
+    }) }
 })
 })
 
 app.get("/produs/:id", function(req,res){
-    client.query(`select * from prajituri where id=${req.params.id}`,function(err,rez){
+    client.query(`select * from produse where id=${req.params.id}`,function(err,rez){
     if(err){
         console.log(err)
         afisareEroare(res,2)
@@ -348,7 +354,6 @@ fs.watch(obGlobal.folderScss, function(eveniment, numeFis) {
 });
 
 app.get("/*pagina", function(req,res){
-    console.log("Cale pagina", req.url);
     if(req.url.startsWith("/resurse")  && path.extname(req.url)==""){
         afisareEroare(res,403);
         return;

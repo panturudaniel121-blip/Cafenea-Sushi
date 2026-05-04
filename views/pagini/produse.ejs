@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="ro">
     <head>
-        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
+        <meta name="keywords" content="cafenea,sushi,cafea,cafeaua">
+        <meta name="description" content="Vizitati-ne pentru cafea intensa și BAUTURI premium.">
+        <title>Produse</title>
         <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
         <title>Cofetăria Dulcelind - Produse</title>
-        <%- include("../fragmente/nav") %>     
+        <%- include("../fragmente/head") %>     
         <script type="text/javascript" src=/resurse/js/produse.js></script>
         <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
 
     </head>
-    <body>
 
+<body>
 
-    <%- include("../fragmente/head") %>
-
+    <header>
+            <h1 class="pacifico titlu-site">Produse <i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i>
+                <div>
+                    <h1 class="pacifico reflexie">Produse <i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i>
+                </div>
+            </h1>
+        <%- include("../fragmente/nav.ejs");  %> 
+    </header>
+    <br>
     <main>
         <label> Nume: <input type="text" id="inp-nume"></label>
         <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
@@ -25,7 +33,7 @@
             <p><label>Mediu (350 &le; calorii &lt; 700)
                 <input id="i_rad2"  name="gr_rad" value="350:700" type="radio"/>
             </label>
-            <p><label>Ridicat caloric (700 &le; calorii)
+            <p><label>Ridicat caloric (700 &ge; calorii)
                 <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio"/>
             </label>
             <p><label>Toate
@@ -60,23 +68,28 @@
             <h2>Produse</h2>
             <div class="grid-produse">
                 <% for( let prod of locals.produse) { %>
-                    <article class="produs" >
-                        <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
+                    <article class="produs">
+                        <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume" style="color: black;"><%- prod.nume %></span></a></h3>
                         <div class="info-prod">
-                            <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                            <p class="calorii">Calorii: <span class="val-calorii"><%- prod.calorii%></span></p>
-                            <p class="gramaj">Gramaj: <span class="val-gramaj"><%- prod.gramaj%></span></p>
+                            <p class="pret">Preț: <span class="val-pret"><%- prod.pret %></span> RON</p>
+                            <p class="calorii">Calorii: <span class="val-calorii"><%- prod.calorii %></span> kcal</p>
+                            <p class="cantitate">Cantitate: <span class="val-cantitate"><%- prod.cantitate %></span> ml/g</p>
+                            <p class="temperatura">Servire: <span class="val-temperatura"><%- prod.temperatura_servire %></span></p>
                         </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
+                        <p class="categorie">Categorie: <span class="val-categorie"><%- prod.categorie_mare %></span></p>
+                        <p class="subcategorie">Tip: <span class="val-subcategorie"><%- prod.categorie_mica %></span></p>
+                        <p class="vegan">Vegan: <span class="val-vegan"><%- prod.este_vegan ? 'Da' : 'Nu' %></span></p>
                         <figure>
-                            <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+                            <a href="/produs/<%-prod.id %>">
+                                <img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" />
+                            </a>
                         </figure>
                         <label class="selecteaza-cos">
                             Selectează:<br/>
                             <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
                         </label>
                     </article>
-                <% }%>
+                <% } %>
             </div>
         </section>
     </main>

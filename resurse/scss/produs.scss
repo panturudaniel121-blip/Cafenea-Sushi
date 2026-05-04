@@ -1,0 +1,37 @@
+h2 {
+  padding: 0.4rem;
+}
+
+#art-produs {
+  margin: 0 auto;
+  width: 70%;
+  max-width: 700px;
+  box-shadow: 0px 0px 10px 5px grey;
+  padding: 0.4rem;
+
+  p {
+    margin: 0;
+    padding: 0.4rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+
+    span {
+      font-weight: normal;
+    }
+
+  }
+
+  @media screen and (max-width: 700px) {
+    margin: 0 auto;
+    width: 95%;
+  }
+}
+
+.imag-produs {
+  text-align: center;
+
+  img {
+    width: 50%;
+    height: auto;
+  }
+}
