@@ -9,6 +9,21 @@ body {
   min-width: 330px;
 }
 
+body.dark {
+  color: white;
+  background-color: #7e6022;
+}
+body.dark section {
+  background-color: #5b5540;
+  border: 1px solid rgb(255, 255, 255);
+}
+body.dark figcaption, body.dark header, body.dark figure, body.dark footer, body.dark td {
+  background-color: #5b5540;
+}
+body.dark table, body.dark td:nth-child(odd), body.dark td:nth-child(even), body.dark th:nth-child(odd), body.dark th:nth-child(even) {
+  color: white !important;
+}
+
 section {
   background-color: #FFE68D;
   border: 1px solid rgb(0, 0, 0);

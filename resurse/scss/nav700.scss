@@ -37,7 +37,7 @@ ul.meniu {
 }
 
 ul.meniu{
-  li{
+  li,#schimba_tema{
     div{
       p{
         @extend %line-block;

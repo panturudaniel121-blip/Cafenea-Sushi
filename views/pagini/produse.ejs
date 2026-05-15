@@ -7,8 +7,13 @@
         <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
         <title>Cofetăria Dulcelind - Produse</title>
         <%- include("../fragmente/head") %>     
-        <script type="text/javascript" src=/resurse/js/produse.js></script>
-        <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+        <script type="text/javascript" src=/resurse/js/suma.js></script>
+        <script type="text/javascript" src=/resurse/js/sortare.js></script>
+        <script type="text/javascript" src=/resurse/js/filtrare.js></script>
+        <!-- <script type="text/javascript" src=/resurse/js/produse-cos.js></script> -->
 
     </head>
 
@@ -24,76 +29,185 @@
     </header>
     <br>
     <main>
-        <label> Nume: <input type="text" id="inp-nume"></label>
-        <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
-        <div> Calorii:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-            <p><label>Dietetic (calorii &lt; 350)
-                <input id="i_rad1"  name="gr_rad" value="0:350" type="radio"/>
-            </label></p>
-            <p><label>Mediu (350 &le; calorii &lt; 700)
-                <input id="i_rad2"  name="gr_rad" value="350:700" type="radio"/>
-            </label>
-            <p><label>Ridicat caloric (700 &ge; calorii)
-                <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio"/>
-            </label>
-            <p><label>Toate
-                <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
-            </label>
+
+        <section class="filtre-produse p-4 mb-5 shadow-custom rounded-custom">
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <label for="inp-nume" class="form-label fw-bold">Nume produs:</label>
+                    <input type="text" id="inp-nume" class="form-control">
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="form-floating h-100">
+                        <textarea id="inp-descriere" class="form-control h-100" placeholder="Cuvinte cheie descriere"></textarea>
+                        <label for="inp-descriere">Cuvinte cheie descriere</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <label for="inp-categorie" class="form-label fw-bold">Categorie:</label>
+                    <select id="inp-categorie" class="form-select">
+                        <option id="sel-toate" selected value="toate">Oricare</option>
+                        <% for (let opt of locals.optiuni) { %>
+                            <option value="<%- opt.tip || opt.unnest %>"><%- opt.tip || opt.unnest %></option>
+                        <% } %>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <label for="inp-subcategorie" class="form-label fw-bold">Subcategorie:</label>
+                    <input list="lista-subcategorii" id="inp-subcategorie" class="form-control">
+                    <datalist id="lista-subcategorii">
+                        <% for (let s of locals.subcategorii) { %>
+                            <option value="<%- s.subcat || s.unnest %>"></option>
+                        <% } %>
+                    </datalist>
+                </div>
+
+                <div class="col-12 col-lg-8">
+                    <p class="fw-bold mb-2">Calorii:</p>
+                    <div class="btn-group w-100 flex-wrap" role="group">
+                        <input type="radio" class="btn-check" name="gr_rad" id="i_rad1" value="0:350" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="i_rad1">Dietetic (&lt; 350)</label>
+
+                        <input type="radio" class="btn-check" name="gr_rad" id="i_rad2" value="350:700" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="i_rad2">Mediu (350 - 700)</label>
+
+                        <input type="radio" class="btn-check" name="gr_rad" id="i_rad3" value="700:1000000000" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="i_rad3">Ridicat (&ge; 700)</label>
+
+                        <input type="radio" class="btn-check" name="gr_rad" id="i_rad4" value="toate" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary" for="i_rad4">Toate</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <label for="inp-pret" class="form-label fw-bold">Preț maxim: <span id="infoRange">(70)</span></label>
+                    <div class="d-flex align-items-center gap-3 mt-2">
+                        <span class="fw-bold fs-5">0</span>
+                        <input type="range" class="form-range flex-grow-1" id="inp-pret" value="70" min="0" max="70">
+                        <span class="fw-bold fs-5">70</span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <label for="inp-temperatura" class="form-label fw-bold">Temperatură servire:</label>
+                    <select id="inp-temperatura" class="form-select" multiple size="4">
+                        <% for (let t of locals.temperaturi) { %>
+                            <option value="<%- t.temp || t.unnest %>"><%- t.temp || t.unnest %></option>
+                        <% } %>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 d-flex flex-column gap-3 justify-content-center">
+                    <div class="w-100">
+                        <input type="checkbox" class="btn-check" id="inp-vegan" value="vegan" autocomplete="off">
+                        <label class="btn btn-outline-secondary w-100 fw-bold" for="inp-vegan">Doar produse vegane</label>
+                    </div>
+                    <div class="w-100">
+                        <input type="checkbox" class="btn-check" id="inp-noutati" value="noutati" autocomplete="off">
+                        <label class="btn btn-outline-secondary w-100 fw-bold" for="inp-noutati">Noutăți</label>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+           
+        <div class="butoane-filtrare d-flex flex-wrap gap-2">
+            <button class="c1 c2 c3 btn btn-primary" id="filtrare">
+                <span class="d-none d-md-inline">Filtreaza</span>
+                <i class="bi bi-sliders"></i>
+            </button>    
+            <button class="btn btn-outline-danger" id="resetare">
+                <span class="d-none d-md-inline">Reseteaza</span>
+                <i class="bi bi-eraser-fill"></i>
+            </button>
+            <button class="btn btn-secondary" id="sortCrescNume">
+                <span class="d-none d-md-inline">Sorteaza crescator dupa pret si nume</span>
+                <i class="bi bi-arrow-down-up"></i>
+            </button>
+            <button class="btn btn-secondary" id="sortDescrescNume">
+                <span class="d-none d-md-inline">Sorteaza descrescator dupa pret si nume</span>
+                <i class="bi bi-arrow-down-up"></i>
+            </button>
+            <button class="btn btn-info" id="calculPret">
+                <span class="d-none d-md-inline">Afiseaza suma produselor curente</span>
+                <i class="bi bi-piggy-bank"></i>
+            </button>
+
+            <p id="p-suma" class="w-100 mt-2 text-muted small">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
         </div>
-
-
-        <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0"  max="70"> <span id="infoRange">(0)</span></label>
-        <label>Select simplu:
-            <select id="inp-categorie">
-                <option id="sel-toate" selected value="toate">toate</option>
-                <% for (let opt of locals.optiuni) { %>
-                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
-                <% } %>
-            </select>
-        </label>
-
-        <p>
-        <button class="c1 c2 c3" id="filtrare">Filtreaza</button> 
-
-        <button id="resetare">Reseteaza</button><br/>
-        <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
-        
-        </p>
       
-        <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
   
-        <section id="produse">
-
-            <h2>Produse</h2>
-            <div class="grid-produse">
-                <% for( let prod of locals.produse) { %>
-                    <article class="produs">
-                        <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume" style="color: black;"><%- prod.nume %></span></a></h3>
-                        <div class="info-prod">
-                            <p class="pret">Preț: <span class="val-pret"><%- prod.pret %></span> RON</p>
-                            <p class="calorii">Calorii: <span class="val-calorii"><%- prod.calorii %></span> kcal</p>
-                            <p class="cantitate">Cantitate: <span class="val-cantitate"><%- prod.cantitate %></span> ml/g</p>
-                            <p class="temperatura">Servire: <span class="val-temperatura"><%- prod.temperatura_servire %></span></p>
-                        </div>
-                        <p class="categorie">Categorie: <span class="val-categorie"><%- prod.categorie_mare %></span></p>
-                        <p class="subcategorie">Tip: <span class="val-subcategorie"><%- prod.categorie_mica %></span></p>
-                        <p class="vegan">Vegan: <span class="val-vegan"><%- prod.este_vegan ? 'Da' : 'Nu' %></span></p>
-                        <figure>
-                            <a href="/produs/<%-prod.id %>">
-                                <img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" />
-                            </a>
-                        </figure>
+    <section id="produse">
+        <h2>Produse</h2>
+        <div class="grid-produse">
+        <% for( let prod of locals.produse) { %>
+            <% 
+                let dataProd = new Date(prod.data_adaugare || Date.now());
+                let zile = ['Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata'];
+                let luni = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
+                let dataFormatata = zile[dataProd.getDay()] + ' ' + dataProd.getDate() + ' ' + luni[dataProd.getMonth()] + ' ' + dataProd.getFullYear();
+                let clasaCategorie = prod.tip_produs ? prod.tip_produs.replace(/\s+/g, '') : 'default';
+                %>
+            
+            <article id="artc-<%- prod.id %>" class="produs <%- clasaCategorie %>">
+                <h3 class="nume val-nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume %></span></a></h3>
+                
+                <div class="container-coloane">
+                    <div class="coloana-1">
+                        <a href="/produs/<%-prod.id %>">
+                            <img src="/resurse/imagini/produse/<%- prod.imagine %>" alt="<%- prod.nume %>" />
+                        </a>
+                        
+                        <ul class="lista-caracteristici">
+                            <li>
+                                <span class="label">Preț:</span> 
+                                <span class="valoare val-pret"><%- prod.pret %> RON</span>
+                            </li>
+                            <li>
+                                <span class="label">Servire:</span> 
+                                <span class="valoare"><%- prod.temperatura_servire %></span>
+                            </li>
+                            <li>
+                                <span class="label">Categorie secundara:</span> 
+                                <span class="valoare"><%- prod.categorie_mica%></span>
+                            </li>
+                            <li>
+                                <span class="label">Calorii:</span> 
+                                <span class="valoare"><%- prod.calorii%></span>
+                            </li>
+                            <li>
+                                <span class="label">Ingrediente:</span> 
+                                <span class="valoare"><%- prod.ingrediente ? prod.ingrediente.join(', ') : '-' %></span>
+                            </li>
+                            <li>
+                                <span class="label">Adăugat la:</span> 
+                                <time datetime="<%- dataProd.toISOString() %>"><%- dataFormatata %></time>
+                            </li>
+                            <li>
+                                <span class="label">Vegan:</span> 
+                                <span class="valoare"><%- prod.este_vegan ? 'Da' : 'Nu' %></span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="coloana-2">
+                        <p class="categorie">Categorie: <span class="val-categorie"><%- prod.tip_produs %></span></p>
+                        <p class="descriere"><%- prod.descriere %></p>
+                        
                         <label class="selecteaza-cos">
                             Selectează:<br/>
                             <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
                         </label>
-                    </article>
-                <% } %>
-            </div>
-        </section>
+                    </div>
+                </div>
+            </article>
+            <% } %>
+        </div>
+    </section>
     </main>
-
+    
     <%- include("../fragmente/footer") %>
-    </body>
+</body>
 </html>

@@ -26,7 +26,7 @@ ul.meniu ul {
   margin: 0;
   list-style-type: none;
 }
-ul.meniu li {
+ul.meniu li, ul.meniu #schimba_tema {
   position: relative;
   gap: 8px;
   width: 160px;
@@ -44,38 +44,39 @@ ul.meniu li {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
-ul.meniu li:hover {
+ul.meniu li:hover, ul.meniu #schimba_tema:hover {
   background-color: #FFEC38;
   text-shadow: 0px 0px rgb(0, 0, 0);
 }
-ul.meniu li:hover > ul {
+ul.meniu li:hover > ul, ul.meniu #schimba_tema:hover > ul {
   display: block;
   position: absolute;
   top: 100%;
   left: 0;
   z-index: 10;
 }
-ul.meniu li:hover > ul > li {
+ul.meniu li:hover > ul > li, ul.meniu #schimba_tema:hover > ul > li {
   text-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
   text-shadow: none;
 }
-ul.meniu li:hover > ul > li:hover {
+ul.meniu li:hover > ul > li:hover, ul.meniu #schimba_tema:hover > ul > li:hover {
   text-shadow: none;
   background-color: #FFD539;
 }
-ul.meniu li:hover > ul > li > a {
+ul.meniu li:hover > ul > li > a, ul.meniu #schimba_tema:hover > ul > li > a {
   text-decoration: none;
   color: black;
 }
-ul.meniu li p {
+ul.meniu li p, ul.meniu #schimba_tema p {
   display: inline-block;
   margin: 0;
 }
-ul.meniu li i {
+ul.meniu li i, ul.meniu #schimba_tema i {
   margin: 0;
 }
 

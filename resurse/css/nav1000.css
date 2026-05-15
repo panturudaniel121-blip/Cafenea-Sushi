@@ -2,10 +2,10 @@
   display: none;
 }
 
-ul.meniu li div p {
+ul.meniu li div p, ul.meniu #schimba_tema div p {
   display: none;
   margin: 0;
 }
-ul.meniu li div i {
+ul.meniu li div i, ul.meniu #schimba_tema div i {
   display: block;
 }

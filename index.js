@@ -64,35 +64,50 @@ app.get("/despre", function(req, res){
 });
 
 app.get("/produse", function(req,res){
-    clauzaWhere=""
-    console.log("req.query.tip")
+    let clauzaWhere=""
+    
     if(req.query.tip){
         clauzaWhere=`where tip_produs = '${req.query.tip}'`
     }
+    
     client.query(`select * from produse ${clauzaWhere}`,function(err,rez){
         if(err){
             console.log(err)
             afisareEroare(res,2)
         }
         else{
-            client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezOptiuni){
-    
-            if (err){
-
-                console.log("Eroare", err)
-                afisareEroare(res,2)
-
-            }
-
-            else{
-                res.render("pagini/produse",{
-                    produse: rez.rows,
-                    optiuni:rezOptiuni.rows
-            })
-                
-            }
-    }) }
-})
+            client.query("select unnest(enum_range(null::tip_produs)) as tip", function(err, rezOptiuni){
+                if (err){
+                    console.log(err)
+                    afisareEroare(res,2)
+                }
+                else{
+                    client.query("select unnest(enum_range(null::categorie_secundara)) as subcat", function(err, rezSubcat){
+                        if (err){
+                            console.log(err)
+                            afisareEroare(res,2)
+                        }
+                        else{
+                            client.query("select unnest(enum_range(null::temp_servire)) as temp", function(err, rezTemp){
+                                if (err){
+                                    console.log(err)
+                                    afisareEroare(res,2)
+                                }
+                                else{
+                                    res.render("pagini/produse",{
+                                        produse: rez.rows,
+                                        optiuni: rezOptiuni.rows,
+                                        subcategorii: rezSubcat.rows,
+                                        temperaturi: rezTemp.rows
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            }) 
+        }
+    })
 })
 
 app.get("/produs/:id", function(req,res){
@@ -299,7 +314,6 @@ function initImagini(){
         imag.fisier_imagine=path.join("/", caleGalerie, imag.fisier_imagine )
         
     }
-    console.log(obGlobal.obImagini)
 }
 initImagini();
 

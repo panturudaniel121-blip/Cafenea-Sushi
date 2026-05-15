@@ -3,11 +3,22 @@ $culoare_fundal_interior: #FFE68D;
 $culoare2: #FFEC38;
 $culoare3: #FFD539;
 $culoare4: #FFA038;
+$alb: white;
+$negru: black;
+$culoare_fundal_exterior-inchis: #7e6022;
+$culoare_fundal_interior-inchis: #5b5540;
+$culoare2-inchis: #6c641a;
+$culoare3-inchis: #605018;
+$culoare4-inchis: #6a3c0b;
+$culoare_contur-inchis: rgb(255, 255, 255);
 $culoare_contur: rgb(0, 0, 0);
 $dimensiune_figuri: 500px;
 $margine_pagina: 100px;
 $dimensiune_text: 16px;
 $padding_zone: 15px;
+$latime_buton: 160px;
+$inaltime_buton: 35px;
+
 
 body {
     background-color: $culoare_fundal_exterior;
@@ -16,7 +27,27 @@ body {
     margin: 0;
     font-size: $dimensiune_text;
     transition: all 0.3s linear;
-    min-width:330px
+    min-width:330px;
+    
+}
+
+body.dark{
+    color: $alb;
+    background-color: $culoare_fundal_exterior-inchis;
+
+    section{
+    background-color: $culoare_fundal_interior-inchis;
+    border: 1px solid $culoare_contur-inchis;
+    }
+
+    figcaption,header,figure,footer,td{
+        background-color: $culoare_fundal_interior-inchis;
+    }
+
+    table,td:nth-child(odd),td:nth-child(even),th:nth-child(odd),th:nth-child(even){
+        color: $alb !important ;
+    }
+
 }
 
 section {

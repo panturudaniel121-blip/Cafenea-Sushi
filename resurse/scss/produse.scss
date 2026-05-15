@@ -1,97 +1,290 @@
-main {
-  --padd-main: 1rem;
-}
+    $padd-main: 1rem;
+    $culoare_fundal_exterior: #FFBC38;
+    $culoare_fundal_interior: #FFE68D;
+    $culoare2: #FFEC38;
+    $culoare3: #FFD539;
+    $culoare4: #FFA038;
+    $culoare_contur: rgb(0, 0, 0);
 
-.grid-produse {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
 
-    article{
-        a{
-           span{
-                &:visited{
-                    color: black !important ;
-                }
+    .grid-produse {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+
+    article {
+        a {
+        span {
+            &:visited {
+            color: black !important;
             }
         }
-    }
-
-  .produs {
-    border-radius: 2rem;
-    box-shadow: 0px 0px 0.8rem 0.3rem grey;
-    overflow: hidden;
-    padding: 0.5rem;
-
-    h3 {
-      text-align: center;
-      margin-top: 0;
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-
-      a {
-        color: black;
-
-        &:hover {
-          color: white;
         }
-      }
     }
 
-    figure {
-      text-align: center;
+    .produs {
+        border-radius: 2rem;
+        box-shadow: 0px 0px 0.8rem 0.3rem grey;
+        overflow: hidden;
+        padding: 0.5rem;
+        position: relative;
 
-      img {
-        border: 1px solid grey;
-        aspect-ratio: 4/3;
-        
-      }
-    }
-
-    .info-prod {
-      display: flex;
-      height: 3rem;
-
-      p {
-        font-size: 0.9rem;
-        width: 25%;
+        h3 {
         text-align: center;
-        font-weight: bold;
-      }
+        margin-top: 0;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+
+        }
+
+        .container-coloane {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1rem;
+        padding-bottom: 3.5rem;
+        }
+
+        .coloana-1 {
+            img {
+            aspect-ratio: 4/3;
+            margin: 1rem;
+            width: 80%;
+            }
+
+        .lista-caracteristici {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+
+            .label {
+                font-weight: bold;
+                background-color: $culoare3;
+                padding: 0.2rem 0.5rem;
+                border-radius: 0.3rem;
+                display: inline-block;
+                margin-right: 0.5rem;
+            }
+
+            .valoare, time {
+                text-decoration: underline;
+            }
+            }
+        }
+        }
+
+        .coloana-2 {
+        p.categorie {
+            text-align: left;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+
+            .val-categorie {
+                text-decoration: underline;
+            }
+        }
+
+        .descriere {
+            text-align: justify;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        }
+
+        .info-prod {
+        display: flex;
+        height: 3rem;
+
+        p {
+            font-size: 0.9rem;
+            width: 25%;
+            text-align: center;
+            font-weight: bold;
+        }
+        }
+    }
     }
 
-    p.categorie {
-      text-align: center;
-      font-weight: bold;
+    .info-produse {
+    padding: 0.2rem;
+    box-shadow: 0px 0px 0.5rem 0.15rem grey;
     }
-  }
 
+    .selecteaza-cos {
+    display: inline-block;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
 
+    }
+
+    .butoane-filtrare{
+
+        margin: 1rem;
+
+        button{
+            border-radius: 30px;
+            background-color: $culoare4;
+            color: rgb(0, 0, 0);    
+            border: 1px solid $culoare_contur;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s linear;
+        
+            &:hover {
+                background-color: $culoare2;
+            }
+
+        }
+
+        p{
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.4rem ;
+            text-decoration: underline;
+        }
+    }
+
+// .filtre-produse {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+//   gap: 1rem;
+//   padding: 2rem;
+//   border-radius: 2rem;
+//   box-shadow: 0px 0px 0.8rem 0.3rem grey;
+//   margin-bottom: 3rem;
+
+//   .grup-filtru {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
+
+//     label {
+//       font-weight: bold;
+//       margin-bottom: 0.5rem;
+//     }
+
+//     .titlu-grup {
+//       font-weight: bold;
+//       margin-top: 0;
+//       margin-bottom: 0.8rem;
+//     }
+
+//     input[type="text"],
+//     textarea,
+//     input[list],
+//     select {
+//       border: 1px solid grey;
+//       border-radius: 0.5rem;
+//       padding: 0.2rem;
+//       font-size: 1rem;
+//       background-color: white;
+//     }
+
+//     textarea {
+//       resize: vertical;
+//       min-height: 3rem;
+//     }
+
+//     select[multiple] {
+//       overflow-y: auto;
+      
+//       option {
+//         padding: 0.1rem;
+        
+//         &:checked {
+//           font-weight: bold;
+//         }
+//       }
+//     }
+//   }
+
+//   .optiuni-radio {
+//     display: flex;
+//     flex-direction: column;
+
+//     label {
+//       font-weight: normal;
+//       display: flex;
+//       align-items: center;
+//       margin: 0;
+//       cursor: pointer;
+
+//       input[type="radio"] {
+//         margin-right: 0.8rem;
+//         transform: scale(1.2);
+//         cursor: pointer;
+//       }
+//     }
+//   }
+
+//   .filtru-range {
+//     .range-container {
+//       display: flex;
+//       align-items: center;
+//       margin-top: 0.5rem;
+
+//       input[type="range"] {
+//         flex: 1;
+//         margin: 0;
+//         cursor: pointer;
+//       }
+
+//       span {
+//         font-weight: bold;
+//         font-size: 1.1rem;
+//       }
+//     }
+    
+//     #infoRange {
+//       color: black;
+//       font-weight: bold;
+//     }
+//   }
+
+//   .filtru-checkbox {
+//     justify-content: center;
+
+//     label {
+//       display: flex;
+//       align-items: center;
+//       font-weight: bold;
+//       font-size: 1.1rem;
+//       cursor: pointer;
+
+//       input[type="checkbox"] {
+//         margin-right: 0.8rem;
+//         transform: scale(1.3);
+//         cursor: pointer;
+//       }
+//     }
+//   }
+// }
+
+.stil-suma
+{
+    font-size: 1.2rem;
+    background: #FFEC38;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    text-align: center;
 }
 
-
-.info-produse {
-  padding: 0.2rem;
-  box-shadow: 0px 0px 0.5rem 0.15rem grey;
+.shadow-custom {
+  box-shadow: 0px 0px 0.8rem 0.3rem grey;
 }
 
-.produs {
-  position: relative;
+.rounded-custom {
+  border-radius: 2rem;
 }
 
-.selecteaza-cos {
-  display: inline-block;
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
-  border-radius: 0.5rem;
-  text-align: center;
-  padding: 0.3rem;
-  border: 1px solid transparent;
-}
-
-.selectat {
-  color: green;
-  background-color: yellow;
-  font-weight: bold;
+.filtre-produse {
+  background-color: white;
 }

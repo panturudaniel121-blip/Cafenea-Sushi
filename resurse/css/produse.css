@@ -1,7 +1,3 @@
-main {
-  --padd-main: 1rem;
-}
-
 .grid-produse {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -15,6 +11,7 @@ main {
   box-shadow: 0px 0px 0.8rem 0.3rem grey;
   overflow: hidden;
   padding: 0.5rem;
+  position: relative;
 }
 .grid-produse .produs h3 {
   text-align: center;
@@ -22,18 +19,51 @@ main {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-.grid-produse .produs h3 a {
-  color: black;
+.grid-produse .produs .container-coloane {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  padding-bottom: 3.5rem;
 }
-.grid-produse .produs h3 a:hover {
-  color: white;
-}
-.grid-produse .produs figure {
-  text-align: center;
-}
-.grid-produse .produs figure img {
-  border: 1px solid grey;
+.grid-produse .produs .coloana-1 img {
   aspect-ratio: 4/3;
+  margin: 1rem;
+  width: 80%;
+}
+.grid-produse .produs .coloana-1 .lista-caracteristici {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.grid-produse .produs .coloana-1 .lista-caracteristici li {
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+}
+.grid-produse .produs .coloana-1 .lista-caracteristici li .label {
+  font-weight: bold;
+  background-color: #FFD539;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.grid-produse .produs .coloana-1 .lista-caracteristici li .valoare, .grid-produse .produs .coloana-1 .lista-caracteristici li time {
+  text-decoration: underline;
+}
+.grid-produse .produs .coloana-2 p.categorie {
+  text-align: left;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+.grid-produse .produs .coloana-2 p.categorie .val-categorie {
+  text-decoration: underline;
+}
+.grid-produse .produs .coloana-2 .descriere {
+  text-align: justify;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 .grid-produse .produs .info-prod {
   display: flex;
@@ -45,18 +75,10 @@ main {
   text-align: center;
   font-weight: bold;
 }
-.grid-produse .produs p.categorie {
-  text-align: center;
-  font-weight: bold;
-}
 
 .info-produse {
   padding: 0.2rem;
   box-shadow: 0px 0px 0.5rem 0.15rem grey;
-}
-
-.produs {
-  position: relative;
 }
 
 .selecteaza-cos {
@@ -64,14 +86,48 @@ main {
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
-  border-radius: 0.5rem;
-  text-align: center;
-  padding: 0.3rem;
-  border: 1px solid transparent;
 }
 
-.selectat {
-  color: green;
-  background-color: yellow;
+.butoane-filtrare {
+  margin: 1rem;
+}
+.butoane-filtrare button {
+  border-radius: 30px;
+  background-color: #FFA038;
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+.butoane-filtrare button:hover {
+  background-color: #FFEC38;
+}
+.butoane-filtrare p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0.4rem;
+  text-decoration: underline;
+}
+
+.stil-suma {
+  font-size: 1.2rem;
+  background: #FFEC38;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.shadow-custom {
+  box-shadow: 0px 0px 0.8rem 0.3rem grey;
+}
+
+.rounded-custom {
+  border-radius: 2rem;
+}
+
+.filtre-produse {
+  background-color: white;
 }

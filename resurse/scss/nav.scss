@@ -36,7 +36,7 @@ ul.meniu {
     list-style-type: none;
   }
 
-  li {
+  li,#schimba_tema {
     position: relative;
     gap: 8px;
     width: $latime_buton;
@@ -54,6 +54,7 @@ ul.meniu {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 
     &:hover {
       background-color: $culoare2;
