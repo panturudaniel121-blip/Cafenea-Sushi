@@ -1,12 +1,23 @@
 window.addEventListener("DOMContentLoaded", function(){
-document.getElementById("schimba_tema").onclick= function(){
-    if(document.body.classList.contains("dark")){
-        document.body.classList.remove("dark")
-        localStorage.removeItem("tema");
+
+    if(localStorage.getItem("tema")=="dark"){
+        document.body.classList.add("dark")
     }
     else{
-        document.body.classList.add("dark")
-        localStorage.setItem("tema","dark");
+        document.body.classList.remove("dark")
     }
-}
+    
+    
+    document.getElementById("schimba_tema").onclick= function(){
+        if(localStorage.getItem("tema")=="dark")
+            {
+                localStorage.setItem("tema","light")
+                document.body.classList.remove("dark")
+            }
+            else {
+                localStorage.setItem("tema","dark")
+                document.body.classList.add("dark") 
+        }
+
+    }
 });

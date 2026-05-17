@@ -1,9 +1,10 @@
 window.onload = function() {
     let rangePret = document.getElementById("inp-pret");
     if (rangePret) {
+        let infoRange = document.getElementById("infoRange");
+        if (infoRange) infoRange.innerHTML = `(${rangePret.value.trim()})`;
         rangePret.onchange = function() {
             let val = this.value.trim();
-            let infoRange = document.getElementById("infoRange");
             if (infoRange) infoRange.innerHTML = `(${val})`;
         }
     }

@@ -82,11 +82,11 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-4">
-                    <label for="inp-pret" class="form-label fw-bold">Preț maxim: <span id="infoRange">(70)</span></label>
+                    <label for="inp-pret" class="form-label fw-bold">Preț maxim: <span id="infoRange">(<%= maxPret %>)</span></label>
                     <div class="d-flex align-items-center gap-3 mt-2">
-                        <span class="fw-bold fs-5">0</span>
-                        <input type="range" class="form-range flex-grow-1" id="inp-pret" value="70" min="0" max="70">
-                        <span class="fw-bold fs-5">70</span>
+                        <span class="fw-bold fs-5"><%= minPret %></span>
+                        <input type="range" class="form-range flex-grow-1" id="inp-pret" value="<%= maxPret %>" min="<%= minPret %>" max="<%= maxPret %>" step="0.01">
+                        <span class="fw-bold fs-5"><%= maxPret %></span>
                     </div>
                 </div>
 

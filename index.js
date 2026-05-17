@@ -94,11 +94,22 @@ app.get("/produse", function(req,res){
                                     afisareEroare(res,2)
                                 }
                                 else{
-                                    res.render("pagini/produse",{
-                                        produse: rez.rows,
-                                        optiuni: rezOptiuni.rows,
-                                        subcategorii: rezSubcat.rows,
-                                        temperaturi: rezTemp.rows
+                                    client.query(`select min(pret) as minpret, max(pret) as maxpret from produse ${clauzaWhere}`, function(err, rezPret){
+                                        if (err){
+                                            console.log(err)
+                                            afisareEroare(res,2)
+                                        } else {
+                                            let minPret = rezPret.rows[0].minpret || 0;
+                                            let maxPret = rezPret.rows[0].maxpret || 0;
+                                            res.render("pagini/produse",{
+                                                produse: rez.rows,
+                                                optiuni: rezOptiuni.rows,
+                                                subcategorii: rezSubcat.rows,
+                                                temperaturi: rezTemp.rows,
+                                                minPret: minPret,
+                                                maxPret: maxPret
+                                            })
+                                        }
                                     })
                                 }
                             })
