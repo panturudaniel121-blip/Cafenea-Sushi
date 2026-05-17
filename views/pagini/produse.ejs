@@ -67,17 +67,16 @@
                 <div class="col-12 col-lg-8">
                     <p class="fw-bold mb-2">Calorii:</p>
                     <div class="btn-group w-100 flex-wrap" role="group">
-                        <input type="radio" class="btn-check" name="gr_rad" id="i_rad1" value="0:350" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="i_rad1">Dietetic (&lt; 350)</label>
-
-                        <input type="radio" class="btn-check" name="gr_rad" id="i_rad2" value="350:700" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="i_rad2">Mediu (350 - 700)</label>
-
-                        <input type="radio" class="btn-check" name="gr_rad" id="i_rad3" value="700:1000000000" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="i_rad3">Ridicat (&ge; 700)</label>
-
-                        <input type="radio" class="btn-check" name="gr_rad" id="i_rad4" value="toate" autocomplete="off" checked>
-                        <label class="btn btn-outline-primary" for="i_rad4">Toate</label>
+                        <% const caloriiRanges = locals.caloriiRanges || [
+                            { id: 'i_rad1', value: '0:350', label: 'Dietetic (< 350)' },
+                            { id: 'i_rad2', value: '350:700', label: 'Mediu (350 - 700)' },
+                            { id: 'i_rad3', value: '700:1000000000', label: 'Ridicat (>= 700)' },
+                            { id: 'i_rad4', value: 'toate', label: 'Toate' }
+                        ]; %>
+                        <% for (let range of caloriiRanges) { %>
+                            <input type="radio" class="btn-check" name="gr_rad" id="<%- range.id %>" value="<%- range.value %>" autocomplete="off" <%= range.value === 'toate' ? 'checked' : '' %>>
+                            <label class="btn btn-outline-primary" for="<%- range.id %>"><%- range.label %></label>
+                        <% } %>
                     </div>
                 </div>
 

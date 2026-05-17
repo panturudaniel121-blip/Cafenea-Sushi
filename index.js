@@ -31,6 +31,50 @@ client=new pg.Client({
 
 client.connect()
 
+function getCaloriiRanges(minCal, maxCal) {
+    const ranges = [];
+    if (minCal == null || maxCal == null) {
+        return [{ id: "i_rad1", value: "toate", label: "Toate" }];
+    }
+
+    const total = maxCal - minCal;
+    if (total <= 0) {
+        return [{ id: "i_rad1", value: "toate", label: "Toate" }];
+    }
+
+    const steps = 3;
+    const step = Math.max(1, Math.ceil(total / steps));
+    let start = minCal;
+
+    for (let i = 0; i < steps; i++) {
+        let end = start + step;
+        const isLast = i === steps - 1;
+        if (isLast) {
+            end = maxCal + 1;
+        }
+        const displayEnd = end - 1;
+        let label;
+
+        if (i === 0) {
+            label = `Până la ${displayEnd} kcal`;
+        } else if (isLast) {
+            label = `Peste ${start} kcal`;
+        } else {
+            label = `${start} - ${displayEnd} kcal`;
+        }
+
+        ranges.push({
+            id: `i_rad${i + 1}`,
+            value: `${start}:${end}`,
+            label: label
+        });
+        start = end;
+    }
+
+    ranges.push({ id: `i_rad${ranges.length + 1}`, value: "toate", label: "Toate" });
+    return ranges;
+}
+
 let vect_folder=["temp","logs","backup","fisiere_uploadate"];
 for(let folder of vect_folder){
     let caleFolder=path.join(__dirname, folder);
@@ -94,20 +138,24 @@ app.get("/produse", function(req,res){
                                     afisareEroare(res,2)
                                 }
                                 else{
-                                    client.query(`select min(pret) as minpret, max(pret) as maxpret from produse ${clauzaWhere}`, function(err, rezPret){
+                                    client.query(`select min(pret) as minpret, max(pret) as maxpret, min(calorii) as mincal, max(calorii) as maxcal from produse ${clauzaWhere}`, function(err, rezPret){
                                         if (err){
                                             console.log(err)
                                             afisareEroare(res,2)
                                         } else {
                                             let minPret = rezPret.rows[0].minpret || 0;
                                             let maxPret = rezPret.rows[0].maxpret || 0;
+                                            let minCal = rezPret.rows[0].mincal || 0;
+                                            let maxCal = rezPret.rows[0].maxcal || 0;
+                                            let caloriiRanges = getCaloriiRanges(minCal, maxCal);
                                             res.render("pagini/produse",{
                                                 produse: rez.rows,
                                                 optiuni: rezOptiuni.rows,
                                                 subcategorii: rezSubcat.rows,
                                                 temperaturi: rezTemp.rows,
                                                 minPret: minPret,
-                                                maxPret: maxPret
+                                                maxPret: maxPret,
+                                                caloriiRanges: caloriiRanges
                                             })
                                         }
                                     })
