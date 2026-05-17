@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+        <title>Set <%- locals.set.nume_set %></title>
+        <%- include("../fragmente/head") %>
+        <link href="/resurse/css/seturi.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <%- include("../fragmente/nav") %>    
+        </header>
+
+        <main>
+            <section>
+                <h2>Detalii Set</h2>
+                <article id="art-produs">
+                    <h3><span class="nume"><%- locals.set.nume_set %></span></h3>
+                    <p>Preț redus: <span class="pret" style="color: green; font-weight: bold; font-size: 1.2em;"><%- locals.set.pret_final %> RON</span></p>
+                    <p>Preț inițial: <span style="text-decoration: line-through;"><%- locals.set.suma_initiala %> RON</span></p>
+                    <p>Descriere: <span class="descriere"><%- locals.set.descriere_set %></span></p>
+                    
+                    <h4 style="margin-top: 20px;">Produse incluse în acest set:</h4>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
+                        <% for(let p of locals.set.produse) { %>
+                            <div style="text-align: center; border: 1px solid #ccc; padding: 15px; border-radius: 8px; width: 150px;">
+                                <a href="/produs/<%- p.id %>" style="text-decoration: none; color: inherit;">
+                                    <img src="/resurse/imagini/produse/<%- p.imagine %>" alt="<%- p.nume %>" style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px;" />
+                                    <br><br>
+                                    <strong><%- p.nume %></strong>
+                                </a>
+                            </div>
+                        <% } %>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <%- include("../fragmente/footer") %>
+    </body>
+</html>

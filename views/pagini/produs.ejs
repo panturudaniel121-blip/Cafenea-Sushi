@@ -10,32 +10,43 @@
     </head>
     
     <body>
-        
         <header>
-    
-            <%- include("../fragmente/nav") %>     
+            <%- include("../fragmente/nav") %>    
         </header>
 
         <main>
             <section>
                 <h2>Pagină produs</h2>
-                    <article id="art-produs">
-                        <h3><span class="nume"><%- locals.prod.nume %></span></h3>
-                        <p>Preț: <span class="pret"><%- locals.prod.pret %> RON</span></p>
-                        <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
-                        <p>Ingrediente: <span class="ingrediente"><%- locals.prod.ingrediente %> </span></p>
-                        <p>Calorii: <span class="calorii"><%- locals.prod.calorii %> kcal</span></p>
-                        <p>Cantitate: <span class="cantitate"><%- locals.prod.cantitate %> ml/g</span></p>
-                        <p>Categorie principală: <span class="categorie-mare"><%- locals.prod.tip_produs %> </span></p>
-                        <p>Subcategorie: <span class="categorie-mica"><%- locals.prod.categorie_mica %> </span></p>
-                        <p>Mod de servire: <span class="temperatura-servire"><%- locals.prod.temperatura_servire %> </span></p>
-                        <p>Vegan: <span class="vegan"><%- locals.prod.este_vegan ? 'Da' : 'Nu' %> </span></p>
-                        <p>Data adăugare: <span class="data-adaugare"><%- locals.prod.data_adaugare %> </span></p>
-                        <figure class="imag-produs">
-                            <img  src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
-                        </figure>    
-                    </article>
-                
+                <article id="art-produs">
+                    <h3><span class="nume"><%- locals.prod.nume %></span></h3>
+                    <p>Preț: <span class="pret"><%- locals.prod.pret %> RON</span></p>
+                    <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
+                    <p>Ingrediente: <span class="ingrediente"><%- locals.prod.ingrediente %> </span></p>
+                    <p>Calorii: <span class="calorii"><%- locals.prod.calorii %> kcal</span></p>
+                    <p>Cantitate: <span class="cantitate"><%- locals.prod.cantitate %> ml/g</span></p>
+                    <p>Categorie principală: <span class="categorie-mare"><%- locals.prod.tip_produs %> </span></p>
+                    <p>Subcategorie: <span class="categorie-mica"><%- locals.prod.categorie_mica %> </span></p>
+                    <p>Mod de servire: <span class="temperatura-servire"><%- locals.prod.temperatura_servire %> </span></p>
+                    <p>Vegan: <span class="vegan"><%- locals.prod.este_vegan ? 'Da' : 'Nu' %> </span></p>
+                    <p>Data adăugare: <span class="data-adaugare"><%- locals.prod.data_adaugare %> </span></p>
+                    
+                    <figure class="imag-produs">
+                        <img src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
+                    </figure>    
+
+                    <% if (locals.seturi && locals.seturi.length > 0) { %>
+                        <p>Este inclus în: 
+                            <span>
+                                <% for(let i = 0; i < locals.seturi.length; i++) { %>
+                                    <a href="/set/<%- locals.seturi[i].id %>" style="color: #FFA038; text-decoration: underline; font-weight: bold;">
+                                        <%- locals.seturi[i].nume_set %>
+                                    </a> 
+                                    (<%- locals.seturi[i].pret_final %> RON)<% if (i < locals.seturi.length - 1) { %>, <% } %>
+                                <% } %>
+                            </span>
+                        </p>
+                    <% } %>
+                </article>
             </section>
         </main>
 

@@ -169,24 +169,119 @@ app.get("/produse", function(req,res){
     })
 })
 
-app.get("/produs/:id", function(req,res){
-    client.query(`select * from produse where id=${req.params.id}`,function(err,rez){
-    if(err){
-        console.log(err)
-        afisareEroare(res,2)
-    }
-    else
-        if(rez.rowCount==0){
-            afisareEroare(res,404,"Produs inexistent")
+app.get("/produs/:id", function(req, res){
+    client.query(`select * from produse where id=${req.params.id}`, function(err, rez){
+        if(err){
+            console.log(err);
+            afisareEroare(res, 2);
         }
-        else{
+        else if(rez.rowCount == 0){
+            afisareEroare(res, 404, "Produs inexistent");
+        }
+        else {
+            let prodDetails = rez.rows[0];
+            let qSeturi = `
+                SELECT s.id, s.nume_set,
+                       json_agg(json_build_object('id', p.id, 'nume', p.nume, 'pret', p.pret, 'imagine', p.imagine)) as produse
+                FROM seturi s
+                JOIN asociere_set as1 ON s.id = as1.id_set
+                JOIN asociere_set as2 ON s.id = as2.id_set
+                JOIN produse p ON as2.id_produs = p.id
+                WHERE as1.id_produs = ${req.params.id}
+                GROUP BY s.id, s.nume_set
+            `;
 
-            res.render("pagini/produs",{
-                prod: rez.rows[0],
-            })
+            client.query(qSeturi, function(errSet, rezSet){
+                if(errSet){
+                    console.log(errSet);
+                    afisareEroare(res, 2);
+                } else {
+                    let seturiDate = rezSet.rows.map(set => {
+                        let n = set.produse.length;
+                        let reducereProcent = Math.min(5, n) * 5;
+                        let sumaPreturi = set.produse.reduce((sum, p) => sum + parseFloat(p.pret), 0);
+                        let pretRedus = sumaPreturi - (sumaPreturi * (reducereProcent / 100));
+                        
+                        set.pret_final = pretRedus.toFixed(2);
+                        return set;
+                    });
+
+                    res.render("pagini/produs", {
+                        prod: prodDetails,
+                        seturi: seturiDate
+                    });
+                }
+            });
         }
-})
-})
+    });
+});
+
+app.get("/seturi", function(req, res) {
+    let querySeturi = `
+        SELECT s.id, s.nume_set, s.descriere_set,
+               json_agg(json_build_object('id', p.id, 'nume', p.nume, 'pret', p.pret, 'imagine', p.imagine)) as produse
+        FROM seturi s
+        JOIN asociere_set asoc ON s.id = asoc.id_set
+        JOIN produse p ON asoc.id_produs = p.id
+        GROUP BY s.id, s.nume_set, s.descriere_set
+    `;
+
+    client.query(querySeturi, function(err, rez) {
+        if(err) {
+            console.log(err);
+            afisareEroare(res, 2);
+        } else {
+            let seturiDate = rez.rows.map(set => {
+                let n = set.produse.length;
+                let reducereProcent = Math.min(5, n) * 5;
+                let sumaPreturi = set.produse.reduce((sum, p) => sum + parseFloat(p.pret), 0);
+                let pretRedus = sumaPreturi - (sumaPreturi * (reducereProcent / 100));
+                
+                set.pret_final = pretRedus.toFixed(2);
+                set.suma_initiala = sumaPreturi.toFixed(2);
+                return set;
+            });
+
+            res.render("pagini/seturi", {
+                seturi: seturiDate
+            });
+        }
+    });
+});
+
+app.get("/set/:id", function(req, res) {
+    let querySet = `
+        SELECT s.id, s.nume_set, s.descriere_set,
+               json_agg(json_build_object('id', p.id, 'nume', p.nume, 'pret', p.pret, 'imagine', p.imagine)) as produse
+        FROM seturi s
+        JOIN asociere_set asoc ON s.id = asoc.id_set
+        JOIN produse p ON asoc.id_produs = p.id
+        WHERE s.id = ${req.params.id}
+        GROUP BY s.id, s.nume_set, s.descriere_set
+    `;
+
+    client.query(querySet, function(err, rez) {
+        if(err) {
+            console.log(err);
+            afisareEroare(res, 2);
+        } else if (rez.rowCount == 0) {
+            afisareEroare(res, 404, "Set inexistent");
+        } else {
+            let setDetail = rez.rows[0];
+            let n = setDetail.produse.length;
+            let reducereProcent = Math.min(5, n) * 5;
+            let sumaPreturi = setDetail.produse.reduce((sum, p) => sum + parseFloat(p.pret), 0);
+            let pretRedus = sumaPreturi - (sumaPreturi * (reducereProcent / 100));
+
+            setDetail.pret_final = pretRedus.toFixed(2);
+            setDetail.suma_initiala = sumaPreturi.toFixed(2);
+
+            res.render("pagini/set", {
+                set: setDetail
+            });
+        }
+    });
+});
 
 function verificaGalerie() {
     const caleGalerieJson = path.join(__dirname, "resurse/json/galerie.json");

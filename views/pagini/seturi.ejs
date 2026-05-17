@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+        <title>Seturile de produse</title>
+        <link href="/resurse/css/seturi.css" type="text/css" rel="stylesheet" />
+        <%- include("../fragmente/head") %>
+    </head>
+<body>
+    <header>
+        <h1 class="pacifico titlu-site">Seturi Disponibile</h1>
+        <%- include("../fragmente/nav.ejs"); %> 
+    </header>
+    <br>
+    <main>      
+        <section id="produse">
+            <h2>Oferte și Seturi</h2>
+            <div class="grid-produse">
+                <% for(let set of locals.seturi) { %>
+                    <article id="artc-set-<%- set.id %>" class="produs">
+                        <h3 class="nume val-nume">
+                            <a href="/set/<%- set.id %>"><span class="val-nume"><%- set.nume_set %></span></a>
+                        </h3>
+                        
+                        <div class="produse-din-set">
+                            <% for(let p of set.produse) { %>
+                                <div class="mini-produs">
+                                    <img src="/resurse/imagini/produse/<%- p.imagine %>" alt="<%- p.nume %>" />
+                                </div>
+                            <% } %>
+                        </div>
+                        
+                        <div class="container-coloane">
+                            <div class="coloana-1">
+                                <ul class="lista-caracteristici">
+                                    <li>
+                                        <span class="label">Preț Total:</span> 
+                                        <span class="valoare val-pret" style="text-decoration: line-through;"><%- set.suma_initiala %> RON</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">Preț Redus:</span> 
+                                        <span class="valoare val-pret" style="font-weight: bold; color: green;"><%- set.pret_final %> RON</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="coloana-2">
+                                <p class="descriere"><%- set.descriere_set %></p>
+                                <a href="/set/<%- set.id %>" style="color: #d84524; text-decoration: underline;">Afișează detaliile setului</a>
+                            </div>
+                        </div>
+                    </article>
+                <% } %>
+            </div>
+        </section>
+    </main>
+    <%- include("../fragmente/footer") %>
+</body>
+</html>
