@@ -7,13 +7,19 @@
     </head>
 <body>
     <header>
-        <h1 class="pacifico titlu-site">Seturi Disponibile</h1>
+        <h1 class="pacifico titlu-site">Seturi si oferte  <i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i>
+            <div>
+                <h1 class="pacifico reflexie">Seturi si oferte  <i class="fa-solid fa-mug-hot" style="--fa-animation-duration: 0.5s;"></i>
+            </div>
+        </h1>
+
         <%- include("../fragmente/nav.ejs"); %> 
+
     </header>
     <br>
     <main>      
         <section id="produse">
-            <h2>Oferte și Seturi</h2>
+            <h2 class="text-primary">Oferte și Seturi</h2>
             <div class="grid-produse">
                 <% for(let set of locals.seturi) { %>
                     <article id="artc-set-<%- set.id %>" class="produs">

@@ -84,11 +84,24 @@ for(let folder of vect_folder){
 }
 
 app.use("/resurse",express.static(path.join(__dirname, "resurse")));
+
 app.use("/dist",express.static(path.join(__dirname, "node_modules/bootstrap/dist")));
 
 app.get("/favicon.ico", function(req,res){
     res.sendFile(path.join(__dirname,"resurse/imagini/favicon/favicon.ico"))
 })
+
+app.use(function(req, res, next) {
+    client.query("select unnest(enum_range(null::tip_produs)) as tip", function(err, rezOptiuni) {
+        if (err) {
+            console.log(err);
+            afisareEroare(res, 2);
+        } else {
+            res.locals.optiuni = rezOptiuni.rows;
+            next();
+        }
+    });
+});
 
 app.get(["/","/index","/home"], function(req,res){
     res.render("pagini/index",{
