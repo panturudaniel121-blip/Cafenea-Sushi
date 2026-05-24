@@ -14,6 +14,7 @@
         <script type="text/javascript" src=/resurse/js/sortare.js></script>
         <script type="text/javascript" src=/resurse/js/filtrare.js></script>
         <!-- <script type="text/javascript" src=/resurse/js/produse-cos.js></script> -->
+        <script src="/resurse/js/banner.js"></script>
 
     </head>
 
@@ -108,7 +109,10 @@
                         <label class="btn btn-outline-secondary w-100 fw-bold" for="inp-noutati">Noutăți</label>
                     </div>
                 </div>
-
+                <div class="w-100 mt-2">
+                    <input type="checkbox" id="salveaza-filtrare" class="form-check-input">
+                    <label for="salveaza-filtrare" class="form-check-label fw-bold text-primary">Salvează filtrarea</label>
+                </div>
             </div>
         </section>
            
@@ -133,12 +137,18 @@
                 <span class="d-none d-md-inline">Afiseaza suma produselor curente</span>
                 <i class="bi bi-piggy-bank"></i>
             </button>
-
             <p id="p-suma" class="w-100 mt-2 text-muted small">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
         </div>
       
   
     <section id="produse">
+
+        <div id="banner-cookie" class="banner-cookie">
+            <p>Acesta este un proiect școlar.</p>
+            <p>Acceptați cookie-uri?</p>
+            <button id="accept-cookies" btn btn-info>OK</button>
+        </div>
+
         <h2>Produse</h2>
         <div class="grid-produse">
         <% for( let prod of locals.produse) { %>

@@ -15,6 +15,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let timerId = null;
 
+    /**
+     * Calculează și afișează temporar suma prețurilor pentru toate produsele vizibile pe pagină.
+     * * @returns {void}
+     */
     function faceSuma() {
         let suma = 0;
         let produse = document.getElementsByClassName("produs");

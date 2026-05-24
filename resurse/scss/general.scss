@@ -518,6 +518,27 @@ figure.fg-img > img {
     } 
 }
 
+.carusel-custom {
+  width: 100%;
+  margin: 2rem auto;
+
+  @media (min-width :800px) {
+    width: 60%;
+    max-width: 1000px;
+  }
+
+  .carousel-item img {
+    height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+  }
+}
+
 @media screen and (max-width:800px) {
     body {
         --margine_pagina: 20px;
@@ -560,6 +581,65 @@ figure.fg-img > img {
     }
 
     .flex-row { display: block; }
+}
+
+
+.banner-cookie {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 25vw;
+  height: 25vw;
+  font-size: 1.2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2vw;
+  box-sizing: border-box;
+  transform-origin: bottom left;
+  animation: revealDisclaimer 5s ease-in-out forwards;
+  z-index: 9999;
+  gap: 1.5vw;
+  overflow: hidden;
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+}
+
+@keyframes revealDisclaimer {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+    background-color: $culoare2;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+    background-color: $culoare4;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .banner-cookie {
+    animation: none;
+    transform: scale(1);
+    opacity: 0.9;
+    background-color: $culoare4;
+    width: 40vw;
+    height: 40vw;
+    font-size: 2.5vw;
+    gap: 2vw;
+    
+    button {
+      font-size: 2vw;
+      padding: 1.5vw 3vw;
+    }
+  }
 }
 
 @media print{

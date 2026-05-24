@@ -1,4 +1,11 @@
 window.onload = function() {
+    /**
+     * Aplică filtrele din formular asupra elementelor cu clasa "produs".
+     * Validează datele introduse (nume, preț, subcategorie), verifică criteriile de filtrare 
+     * (inclusiv calorii, vegan, temperatură, noutăți) și actualizează vizibilitatea 
+     * produselor, afișând numărul de rezultate sau un mesaj de lipsă produse.
+     * * @returns {void}
+     */
     function aplicaFiltre() {
         let elementNume = document.getElementById("inp-nume");
         let elementDescriere = document.getElementById("inp-descriere");
